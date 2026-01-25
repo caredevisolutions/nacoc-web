@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Mic, BookOpen, ExternalLink, Download, Play, ArrowRight } from 'lucide-react';
+import { FileText, Mic, BookOpen, ExternalLink, Download, Play, ArrowRight, Zap, Coffee, Lightbulb, UserSearch, HelpCircle, TrendingUp } from 'lucide-react';
 
 const Resources = () => {
   const newsletters = [
@@ -31,113 +31,142 @@ const Resources = () => {
      {
         title: "Steps to Finding a Mentor",
         desc: "A comprehensive guide on how to connect with experienced professionals who can help you grow.",
-        link: "https://www.sba.gov/content/steps-finding-mentor",
-        gradient: "from-blue-600 to-blue-800"
+        link: "https://www.sba.gov/business-guide/grow-your-business/find-mentor-or-counselor",
+        gradient: "from-blue-600 to-indigo-700",
+        icon: <UserSearch size={40} />
      },
      {
-        title: "20 Questions Before Starting",
+        title: "10 Steps to Start Your Business",
         desc: "Ask yourself these critical questions to ensure you're ready for the business journey.",
-        link: "https://www.sba.gov/content/20-questions-before-starting-business",
-        gradient: "from-secondary to-secondary-dark"
+        link: "https://www.sba.gov/business-guide/10-steps-start-your-business",
+        gradient: "from-emerald-500 to-teal-700",
+        icon: <HelpCircle size={40} />
+     },
+     {
+        title: "Financial Planning 101",
+        desc: "Master the basics of business finance, cash flow, vs profit.",
+        link: "https://www.sba.gov/business-guide/plan-your-business/write-your-business-plan",
+        gradient: "from-amber-500 to-orange-700",
+        icon: <TrendingUp size={40} />
      }
   ];
 
+  // Placeholder icons for the guides above since I didn't import them all
+  const GuideIcon = ({ i }) => {
+      if(i===0) return <Zap className="text-white opacity-80" size={40} />
+      if(i===1) return <Lightbulb className="text-white opacity-80" size={40} />
+      return <Coffee className="text-white opacity-80" size={40} />
+  }
+
   return (
-    <div className="bg-surface-50 min-h-screen pt-24 pb-20">
+    <div className="bg-slate-50 min-h-screen pt-20">
       
-      {/* Header */}
-      <section className="bg-primary-dark relative py-24 mb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-hero-pattern opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-slate-900 opacity-90"></div>
+      {/* Hero Header */}
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-mesh opacity-20 mix-blend-overlay"></div>
+        <div className="absolute -top-[50%] -left-[20%] w-[80%] h-[150%] bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-[50%] -right-[20%] w-[80%] h-[150%] bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        
         <div className="container mx-auto px-6 text-center relative z-10">
-            <motion.h1 
-                initial={{ opacity: 0, y: -20 }}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl lg:text-7xl font-heading font-bold text-white mb-6"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full backdrop-blur-md text-secondary font-bold text-xs uppercase tracking-widest mb-6"
             >
-                Knowledge Hub
+                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                Curated High-Value Content
+            </motion.div>
+            <motion.h1 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-5xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-tight"
+            >
+                Resource <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-secondary">Library</span>
             </motion.h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto font-body leading-relaxed">
-                Access our library of newsletters, podcasts, and business guides designed to help you thrive.
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto font-body leading-relaxed">
+                Empower your journey with our collection of monthly insights, expert audio sessions, and comprehensive guides.
             </p>
         </div>
       </section>
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 -mt-20 relative z-20 pb-24">
         
-        {/* Newsletters Section */}
-        <div className="mb-32">
-            <div className="flex items-center mb-10">
-                <div className="p-4 bg-white shadow-md rounded-2xl mr-6 text-primary border border-slate-100">
-                    <FileText size={32} />
+        {/* Newsletters Grid */}
+        <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 mb-20">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                        <FileText size={24} />
+                    </div>
+                    <h2 className="text-2xl font-bold text-slate-900">Monthly Newsletters</h2>
                 </div>
-                <div>
-                     <h2 className="text-3xl font-heading font-bold text-slate-900">Monthly Newsletters</h2>
-                     <p className="text-slate-500 text-lg">Stay updated with chamber news and community highlights.</p>
-                </div>
+                <button className="text-blue-600 font-bold text-sm flex items-center hover:translate-x-1 transition-transform">
+                    View Archive <ArrowRight size={16} className="ml-1" />
+                </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {newsletters.map((item, index) => (
                     <motion.a 
                         href={item.link}
                         key={index}
-                        whileHover={{ y: -5 }}
-                        className="block bg-white border border-slate-100 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 group relative overflow-hidden"
+                        whileHover={{ y: -4 }}
+                        className="group bg-slate-50 border border-slate-100 p-6 rounded-2xl hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 flex items-start gap-4"
                     >
-                        <div className="absolute top-0 right-0 p-8 opacity-5 transform translate-x-1/2 -translate-y-1/2">
-                            <FileText size={100} />
+                        <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-slate-400 group-hover:text-primary group-hover:scale-110 transition-all duration-300 shrink-0">
+                            <FileText size={20} />
                         </div>
-                        <div className="flex justify-between items-start mb-6 relative z-10">
-                            <span className="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider group-hover:bg-primary/10 group-hover:text-primary transition-colors">{item.year}</span>
-                            <div className="p-2 bg-slate-50 rounded-full group-hover:bg-primary group-hover:text-white transition-colors">
-                                <Download size={20} />
-                            </div>
+                        <div className="flex-grow">
+                             <div className="flex justify-between items-start mb-1">
+                                <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">{item.month}</h3>
+                                <span className="text-[10px] font-bold bg-slate-200 text-slate-600 px-2 py-0.5 rounded uppercase">{item.year}</span>
+                             </div>
+                             <p className="text-xs text-slate-500 mb-3">Community Updates & Highlights</p>
+                             <div className="flex items-center text-xs font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity -ml-2 group-hover:ml-0 duration-300">
+                                Download PDF <Download size={12} className="ml-1" />
+                             </div>
                         </div>
-                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors mb-2 relative z-10">{item.month} Newsletter</h3>
-                        <p className="text-slate-500 relative z-10">Featuring Dr. Shilu Ghimire & Team</p>
                     </motion.a>
                 ))}
             </div>
         </div>
 
-        {/* Podcast Section */}
-        <div className="mb-32 bg-slate-900 rounded-3xl p-10 lg:p-16 relative overflow-hidden text-white shadow-2xl shadow-blue-900/20">
-            <div className="absolute inset-0 bg-mesh opacity-20 mix-blend-overlay"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        {/* Podcast Feature */}
+        <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 lg:p-14 mb-20 relative overflow-hidden text-white shadow-2xl">
+             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-20 -mt-20"></div>
              
-             <div className="flex flex-col lg:flex-row gap-16 relative z-10">
-                <div className="lg:w-1/3">
-                    <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl inline-block text-secondary mb-8 border border-white/10">
+             <div className="flex flex-col lg:flex-row gap-12 relative z-10 items-center">
+                <div className="lg:w-1/3 text-center lg:text-left">
+                    <span className="inline-block p-3 bg-white/10 rounded-2xl mb-6 text-secondary backdrop-blur-md border border-white/5">
                         <Mic size={32} />
-                    </div>
-                    <h2 className="text-4xl font-heading font-bold text-white mb-6">Podcast Series</h2>
-                    <p className="text-slate-300 mb-8 text-lg leading-relaxed">
-                        Tune in to <span className="text-white font-bold">"All About Entrepreneurship"</span>. Authentic conversations with leaders who have walked the path, shared stories of failure and triumph.
+                    </span>
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-4">The NACOC Podcast</h2>
+                    <p className="text-slate-300 mb-8 leading-relaxed">
+                        Authentic conversations with Nepali business leaders navigating the American market. Real stories, real advice.
                     </p>
-                    <button className="px-8 py-4 bg-secondary text-white rounded-full font-bold hover:bg-white hover:text-slate-900 transition-all shadow-lg shadow-secondary/20 flex items-center">
-                        <Play size={20} className="mr-2 fill-current" /> Listen on Spotify
+                    <button className="bg-secondary text-slate-900 px-8 py-3 rounded-full font-bold hover:bg-white transition-colors flex items-center mx-auto lg:mx-0 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                        <Play size={18} className="mr-2 fill-current" /> Listen Now
                     </button>
                 </div>
 
-                <div className="lg:w-2/3 grid gap-6">
+                <div className="lg:w-2/3 grid gap-5 w-full">
                     {podcasts.map((pod, idx) => (
                         <motion.div 
                             key={idx} 
-                            whileHover={{ scale: 1.01 }}
-                            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-8 hover:bg-white/10 transition-colors cursor-pointer group"
+                            whileHover={{ scale: 1.01, backgroundColor: "rgba(255,255,255,0.08)" }}
+                            className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-6 cursor-pointer transition-colors"
                         >
-                             <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 relative shadow-lg">
-                                 <img src={pod.image} alt={pod.title} className="w-full h-full object-cover" />
-                                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                     <Play size={24} className="fill-white" />
+                             <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 relative group">
+                                 <img src={pod.image} alt={pod.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                     <Play size={20} className="fill-white" />
                                  </div>
                              </div>
-                             <div className="flex-grow text-center md:text-left">
-                                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-secondary transition-colors">{pod.title}</h3>
-                                 <p className="text-slate-400 text-sm leading-relaxed">{pod.desc}</p>
+                             <div className="flex-grow">
+                                 <h3 className="text-lg font-bold text-white mb-1 group-hover:text-secondary transition-colors">{pod.title}</h3>
+                                 <p className="text-sm text-slate-400 line-clamp-1">{pod.desc}</p>
                              </div>
-                             <div className="flex-shrink-0 text-xs font-bold text-slate-400 border border-white/10 px-4 py-2 rounded-full uppercase tracking-wider">
+                             <div className="hidden sm:block text-xs font-mono text-slate-500 bg-black/20 px-3 py-1 rounded-full border border-white/5">
                                  {pod.duration}
                              </div>
                         </motion.div>
@@ -146,39 +175,37 @@ const Resources = () => {
              </div>
         </div>
 
-        {/* Entrepreneur Guides */}
+        {/* Guides Section */}
         <div>
-             <div className="flex items-center mb-10">
-                <div className="p-4 bg-white shadow-md rounded-2xl mr-6 text-green-600 border border-slate-100">
-                    <BookOpen size={32} />
-                </div>
-                <div>
-                     <h2 className="text-3xl font-heading font-bold text-slate-900">Entrepreneur Guides</h2>
-                     <p className="text-slate-500 text-lg">Essential reading for starting your business.</p>
-                </div>
+            <div className="text-center mb-12">
+                <span className="text-primary font-bold tracking-widest uppercase text-xs mb-2 block">Enterprise Knowledge</span>
+                <h2 className="text-3xl font-heading font-bold text-slate-900">Entrepreneur Guides</h2>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {guides.map((guide, index) => (
                      <motion.div 
                         key={index}
-                        whileHover={{ y: -5 }}
-                        className={`bg-gradient-to-br ${guide.gradient} p-10 rounded-3xl text-white relative overflow-hidden shadow-xl`}
+                        whileHover={{ y: -8 }}
+                        className={`bg-gradient-to-br ${guide.gradient} p-8 rounded-3xl text-white relative overflow-hidden shadow-lg h-80 flex flex-col justify-between group`}
                      >
-                        <div className="relative z-10 h-full flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-3xl font-bold mb-4">{guide.title}</h3>
-                                <p className="text-white/80 mb-8 text-lg leading-relaxed">
-                                    {guide.desc}
-                                </p>
+                        <div className="absolute top-0 right-0 p-6 opacity-10 transform scale-150 group-hover:rotate-12 transition-transform duration-500">
+                             <GuideIcon i={index} />
+                        </div>
+                        
+                        <div className="relative z-10">
+                            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 border border-white/10">
+                                <GuideIcon i={index} />
                             </div>
-                            <a href={guide.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-bold text-white/90 hover:text-white transition-colors bg-white/10 w-fit px-6 py-3 rounded-full hover:bg-white/20">
-                                Read Guide <ExternalLink size={18} className="ml-2" />
-                            </a>
+                            <h3 className="text-2xl font-bold mb-3 leading-tight">{guide.title}</h3>
+                            <p className="text-white/80 text-sm leading-relaxed mb-6">
+                                {guide.desc}
+                            </p>
                         </div>
-                        <div className="absolute bottom-0 right-0 opacity-10 transform translate-x-10 translate-y-10">
-                            <BookOpen size={200} />
-                        </div>
+                        
+                        <a href={guide.link} className="relative z-10 inline-flex items-center text-sm font-bold border-b border-white/30 pb-1 hover:border-white transition-colors w-fit">
+                            Start Reading <ExternalLink size={14} className="ml-2" />
+                        </a>
                      </motion.div>
                 ))}
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, Globe, Phone, Filter, ChevronDown, ChevronUp, Star } from 'lucide-react';
 
@@ -88,11 +88,22 @@ const BusinessDirectory = () => {
         { name: "Yeti Homes", category: "Real Estate", address: "Irving, TX", phone: "+1 214-555-0101", website: "yetihomes.com", featured: true },
         { name: "Smriti CPA", category: "Financial Services", address: "Euless, TX", phone: "+1 817-555-0102", website: "smriticpa.com", featured: true },
         { name: "NepIT LLC", category: "Technology", address: "Dallas, TX", phone: "+1 469-555-0103", website: "nepit.com", featured: true },
-        { name: "Curry Leaf Restaurant", category: "Restaurant", address: "1800 Valley View Lane, Irving", phone: "+1 972-555-0104", website: "curryleaf.com", featured: false },
+        { name: "Curry Leaf Restaurant", category: "Restaurants", address: "1800 Valley View Lane, Irving", phone: "+1 972-555-0104", website: "curryleaf.com", featured: false },
         { name: "SmallBusinessHelpDFW", category: "Consulting", address: "Plano, TX", phone: "+1 214-555-0105", website: "sbhdfw.com", featured: true },
+        { name: "Everest Insurance", category: "Insurance", address: "Fort Worth, TX", phone: "+1 817-555-0106", website: "everestins.com", featured: false },
     ];
 
-    const [filter, setFilter] = useState('');
+    const [textFilter, setTextFilter] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState("All Categories");
+
+    const categories = ['All Categories', 'Real Estate', 'Restaurants', 'Technology', 'Financial Services', 'Consulting', 'Insurance'];
+
+    const filteredBusinesses = businesses.filter(b => {
+        const matchesText = b.name.toLowerCase().includes(textFilter.toLowerCase()) || 
+                            b.category.toLowerCase().includes(textFilter.toLowerCase());
+        const matchesCategory = selectedCategory === "All Categories" || b.category === selectedCategory;
+        return matchesText && matchesCategory;
+    });
 
   return (
     <div className="bg-surface-50 min-h-screen pt-20">
@@ -129,7 +140,7 @@ const BusinessDirectory = () => {
                     type="text" 
                     className="w-full pl-16 pr-6 py-5 rounded-full text-lg shadow-xl shadow-blue-900/20 focus:outline-none focus:ring-4 focus:ring-secondary/50 transition-all placeholder-slate-400 text-slate-800"
                     placeholder="Search by name, category, or industry..."
-                    onChange={(e) => setFilter(e.target.value)}
+                    onChange={(e) => setTextFilter(e.target.value)}
                 />
             </motion.div>
         </div>
@@ -146,10 +157,18 @@ const BusinessDirectory = () => {
                           <h3 className="font-bold text-lg text-slate-900">Categories</h3>
                       </div>
                       <div className="space-y-3">
-                          {['All Categories', 'Real Estate', 'Restaurants', 'Technology', 'Financial Services', 'Consulting'].map((cat) => (
+                          {categories.map((cat) => (
                               <label key={cat} className="flex items-center space-x-3 cursor-pointer group p-2 hover:bg-slate-50 rounded-lg transition-colors">
-                                  <input type="checkbox" className="form-checkbox h-5 w-5 text-primary rounded border-slate-300 focus:ring-primary" />
-                                  <span className="text-slate-600 font-medium group-hover:text-primary transition-colors">{cat}</span>
+                                  <input 
+                                    type="radio" 
+                                    name="category"
+                                    checked={selectedCategory === cat}
+                                    onChange={() => setSelectedCategory(cat)}
+                                    className="form-radio h-5 w-5 text-primary border-slate-300 focus:ring-primary" 
+                                  />
+                                  <span className={`font-medium transition-colors ${selectedCategory === cat ? 'text-primary' : 'text-slate-600 group-hover:text-primary'}`}>
+                                    {cat}
+                                  </span>
                               </label>
                           ))}
                       </div>
@@ -157,12 +176,20 @@ const BusinessDirectory = () => {
               </div>
 
               {/* Listings */}
-              <div className="lg:w-3/4 grid gap-6">
-                  {businesses
-                    .filter(b => b.name.toLowerCase().includes(filter.toLowerCase()) || b.category.toLowerCase().includes(filter.toLowerCase()))
-                    .map((biz, index) => (
-                      <BusinessCard key={index} biz={biz} />
-                  ))}
+              <div className="lg:w-3/4 flex flex-col gap-6">
+                  {filteredBusinesses.length > 0 ? (
+                      filteredBusinesses.map((biz, index) => (
+                        <BusinessCard key={index} biz={biz} />
+                      ))
+                  ) : (
+                      <div className="text-center py-20 bg-white rounded-2xl border border-slate-100">
+                          <div className="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <Search className="text-slate-400" size={32} />
+                          </div>
+                          <h3 className="text-xl font-bold text-slate-900 mb-2">No businesses found</h3>
+                          <p className="text-slate-500">Try adjusting your search or filters.</p>
+                      </div>
+                  )}
               </div>
           </div>
 

@@ -12,6 +12,10 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import BusinessDirectory from './pages/BusinessDirectory';
 import Resources from './pages/Resources';
+import Events from './pages/Events';
+import EventDetails from './pages/EventDetails';
+import Blogs from './pages/Blogs';
+import BlogDetails from './pages/BlogDetails';
 
 // Scroll to top component
 const ScrollToTop = () => {
@@ -38,6 +42,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/directory" element={<BusinessDirectory />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:id" element={<EventDetails />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
             
             {/* Fallback for undefined routes */}
             <Route path="*" element={<div className="p-20 text-center">Page not found</div>} />
