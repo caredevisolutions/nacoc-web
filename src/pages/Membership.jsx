@@ -1,8 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Star, Zap, Crown, Award, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Membership = () => {
+  const navigate = useNavigate();
+
+  const handleChoosePlan = (plan) => {
+    // Exclude the icon component as it cannot be serialized in navigation state
+    const { icon, ...planDetails } = plan;
+    navigate('/membership/checkout', { state: { plan: planDetails } });
+  };
+
   const tiers = [
     {
       name: 'General Member',
@@ -129,7 +138,10 @@ const Membership = () => {
                     </ul>
                  </div>
 
-                 <button className={`w-full py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center group ${tier.popular ? 'bg-primary hover:bg-primary-dark text-white shadow-xl shadow-primary/25' : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'}`}>
+                 <button 
+                   onClick={() => handleChoosePlan(tier)}
+                   className={`w-full py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center group ${tier.popular ? 'bg-primary hover:bg-primary-dark text-white shadow-xl shadow-primary/25' : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'}`}
+                  >
                     Choose Plan <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                  </button>
               </div>

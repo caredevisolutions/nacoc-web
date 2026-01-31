@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Programs from './pages/Programs';
 import Membership from './pages/Membership';
+import MembershipCheckout from './pages/MembershipCheckout';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import BusinessDirectory from './pages/BusinessDirectory';
@@ -38,6 +39,7 @@ function App() {
             <Route path="/about-us" element={<About />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/membership" element={<Membership />} />
+            <Route path="/membership/checkout" element={<MembershipCheckout />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/directory" element={<BusinessDirectory />} />
