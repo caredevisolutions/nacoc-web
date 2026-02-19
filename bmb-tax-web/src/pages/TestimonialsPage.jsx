@@ -57,7 +57,7 @@ const TestimonialsPage = () => {
             </motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-theme-surface border border-theme-border/80 rounded-2xl"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-theme-card border border-theme-border/80 rounded-2xl"
             >
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} className="text-gold-DEFAULT" fill="currentColor" />)}
@@ -74,7 +74,7 @@ const TestimonialsPage = () => {
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: idx * 0.08 }}
                 whileHover={{ y: -8 }}
-                className="bg-theme-surface p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 relative group hover:shadow-gold cursor-pointer"
+                className="bg-theme-card p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 relative group hover:shadow-gold cursor-pointer"
               >
                 <Quote className="absolute top-6 right-6 text-theme-border group-hover:text-gold-DEFAULT/25 rotate-12 transition-colors duration-300" size={50} fill="currentColor" />
                 <div className="flex gap-1 text-gold-DEFAULT mb-5 relative z-10">
@@ -99,19 +99,18 @@ const TestimonialsPage = () => {
           {/* CTA Banner */}
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="mt-20 rounded-3xl overflow-hidden relative"
-            style={{ background: 'linear-gradient(135deg, #b8921a 0%, #D4AF37 50%, #f5c842 100%)' }}
+            className="mt-20 rounded-3xl overflow-hidden relative bg-theme-bg border border-theme-border/60"
           >
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }}></div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-gold-DEFAULT/6 blur-[100px] rounded-full pointer-events-none"></div>
             <div className="relative z-10 py-16 px-10 text-center">
-              <h2 className="text-3xl md:text-4xl font-heading font-medium text-white mb-4">Ready to join our happy clients?</h2>
-              <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto font-light">Experience the difference of a dedicated financial partner in Texas.</p>
+              <h2 className="text-3xl md:text-4xl font-heading font-medium text-theme-text-main mb-4">Ready to join our <span className="text-gold-DEFAULT italic">happy clients?</span></h2>
+              <p className="text-theme-text-body text-lg mb-10 max-w-xl mx-auto font-light">Experience the difference of a dedicated financial partner in Texas.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-gold-dark px-10 py-4 rounded-full font-bold hover:-translate-y-1 hover:shadow-2xl transition-all shadow-xl">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-dark to-gold-DEFAULT text-white px-10 py-4 rounded-full font-bold shadow-gold hover:shadow-gold-lg hover:-translate-y-1 transition-all">
                   Schedule a Consultation <ArrowRight size={16} />
                 </Link>
-                <Link to="/services" className="inline-flex items-center gap-2 border-2 border-white/60 text-white px-8 py-4 rounded-full font-bold hover:bg-white/15 hover:-translate-y-1 transition-all">
+                <Link to="/services" className="inline-flex items-center gap-2 bg-theme-card border border-theme-border text-theme-text-main px-8 py-4 rounded-full font-bold hover:border-gold-DEFAULT/50 hover:text-gold-DEFAULT hover:-translate-y-1 transition-all">
                   Explore Services
                 </Link>
               </div>

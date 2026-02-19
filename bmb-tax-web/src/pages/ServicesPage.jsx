@@ -96,7 +96,7 @@ const ServicesPage = () => {
                   visible: { opacity: 1, y: 0, transition: { delay: idx * 0.08, duration: 0.5 } },
                 }}
                 whileHover={{ y: -6 }}
-                className="bg-theme-surface p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 group hover:shadow-gold relative overflow-hidden cursor-pointer"
+                className="bg-theme-card p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 group hover:shadow-gold relative overflow-hidden cursor-pointer"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                 <div className={`w-14 h-14 ${service.iconBg} ${service.iconBorder} border rounded-xl flex items-center justify-center ${service.iconColor} mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10`}>

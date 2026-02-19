@@ -1,20 +1,41 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Award, MapPin, TrendingUp, Heart, Sparkles, Star } from 'lucide-react';
+import { ShieldCheck, Award, MapPin, TrendingUp, Heart, Star, ArrowRight, Phone, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const stats = [
-  { value: '15+', label: 'Years of Experience', color: 'text-gold-DEFAULT', bg: 'bg-gold-DEFAULT/10', border: 'border-gold-DEFAULT/20' },
-  { value: '500+', label: 'Happy Clients', color: 'text-accent-indigo', bg: 'bg-accent-indigo/10', border: 'border-accent-indigo/20' },
-  { value: '5.0★', label: 'Google Rating', color: 'text-accent-emerald', bg: 'bg-accent-emerald/10', border: 'border-accent-emerald/20' },
-  { value: '2', label: 'TX Locations', color: 'text-accent-violet', bg: 'bg-accent-violet/10', border: 'border-accent-violet/20' },
+  { value: '15+', label: 'Years of Experience' },
+  { value: '500+', label: 'Happy Clients' },
+  { value: '5.0★', label: 'Google Rating' },
+  { value: '2', label: 'TX Locations' },
 ];
 
 const values = [
-  { icon: ShieldCheck, title: 'Uncompromising Integrity', desc: 'We operate with total transparency. Your trust is sacred, and we protect it with strict ethical standards.', iconBg: 'bg-accent-emerald/10', iconColor: 'text-accent-emerald', border: 'border-accent-emerald/20' },
-  { icon: TrendingUp, title: 'Proactive Growth', desc: "We don't just record history; we help write your future. Our advice is forward-looking and growth-oriented.", iconBg: 'bg-accent-indigo/10', iconColor: 'text-accent-indigo', border: 'border-accent-indigo/20' },
-  { icon: Heart, title: 'Community Focused', desc: 'We are locals helping locals. We invest in long-term relationships, not just transactions.', iconBg: 'bg-accent-rose/10', iconColor: 'text-accent-rose', border: 'border-accent-rose/20' },
+  {
+    icon: ShieldCheck,
+    title: 'Uncompromising Integrity',
+    desc: 'We operate with total transparency. Your trust is sacred, and we protect it with strict ethical standards.',
+    iconColor: 'text-accent-emerald',
+    iconBg: 'bg-accent-emerald/10',
+    border: 'border-accent-emerald/20',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Proactive Growth',
+    desc: "We don't just record history — we help write your future. Our advice is always forward-looking and growth-oriented.",
+    iconColor: 'text-gold-DEFAULT',
+    iconBg: 'bg-gold-DEFAULT/10',
+    border: 'border-gold-DEFAULT/20',
+  },
+  {
+    icon: Heart,
+    title: 'Community Focused',
+    desc: 'We are locals helping locals. We invest in long-term relationships, not just transactions.',
+    iconColor: 'text-accent-rose',
+    iconBg: 'bg-accent-rose/10',
+    border: 'border-accent-rose/20',
+  },
 ];
 
 const AboutPage = () => {
@@ -25,150 +46,244 @@ const AboutPage = () => {
         <meta name="description" content="Learn about BMB Tax, the leading accounting firm in Euless and Waco, TX. Professional, trustworthy, and rated 5 stars by locals." />
       </Helmet>
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 relative overflow-hidden bg-theme-bg">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div className="absolute right-0 top-0 w-[45%] h-[55%] bg-gold-DEFAULT/10 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
-        <div className="absolute left-0 bottom-0 w-[35%] h-[40%] bg-accent-indigo/8 blur-[120px] rounded-full pointer-events-none z-[1]"></div>
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <section className="pt-36 pb-24 relative overflow-hidden bg-theme-bg">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:44px_44px]"></div>
+        <div className="absolute right-0 top-0 w-[500px] h-[400px] bg-gold-DEFAULT/7 blur-[140px] rounded-full pointer-events-none"></div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/25 text-gold-DEFAULT font-bold text-[10px] uppercase tracking-widest mb-8">
-              <Sparkles size={11} /> Since 2010
-            </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-medium text-theme-text-main mb-6 leading-tight">
-              Beyond Numbers. <br/>
-              <span className="text-gold-DEFAULT italic">We Build Futures.</span>
-            </h1>
-            <p className="text-xl text-theme-text-body leading-relaxed max-w-2xl mx-auto font-light">
-              BMB Tax & Financial Service isn&rsquo;t just about filing returns. It&rsquo;s about empowering families and businesses in Texas to achieve true financial freedom.
-            </p>
-          </motion.div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <div className="flex items-center gap-3 mb-7">
+                <div className="h-px w-10 bg-gold-DEFAULT"></div>
+                <span className="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">Since 2010</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-heading font-medium text-theme-text-main leading-[1.05] mb-8">
+                Beyond Numbers.<br />
+                <span className="text-gold-DEFAULT italic">We Build Futures.</span>
+              </h1>
+              <p className="text-xl text-theme-text-body leading-relaxed max-w-2xl font-light">
+                BMB Tax & Financial Service isn&rsquo;t just about filing returns. It&rsquo;s about empowering
+                families and businesses across Texas to achieve true financial freedom.
+              </p>
+            </motion.div>
+          </div>
 
+          {/* Stats row */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-14"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-theme-border/60 rounded-2xl overflow-hidden bg-theme-border/60"
           >
             {stats.map((s, i) => (
-              <motion.div key={i} whileHover={{ y: -4, scale: 1.04 }} className={`${s.bg} ${s.border} border rounded-2xl p-5 hover:shadow-gold transition-all duration-300 cursor-default`}>
-                <div className={`text-3xl font-heading font-bold ${s.color} mb-1`}>{s.value}</div>
-                <div className="text-xs text-theme-text-body font-semibold uppercase tracking-wide">{s.label}</div>
-              </motion.div>
+              <div key={i} className="bg-theme-bg px-8 py-7 text-center">
+                <div className="text-3xl md:text-4xl font-heading font-bold text-gold-DEFAULT mb-1.5">{s.value}</div>
+                <div className="text-xs text-theme-text-light font-semibold uppercase tracking-widest">{s.label}</div>
+              </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Founder */}
-      <section className="py-20 relative overflow-hidden bg-theme-bgAlt">
+      {/* ── Founder ──────────────────────────────────────────────── */}
+      <section className="py-28 relative overflow-hidden bg-theme-bgAlt">
+        <div className="absolute left-0 top-0 w-[400px] h-[400px] bg-gold-DEFAULT/5 blur-[130px] rounded-full pointer-events-none"></div>
+
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/25 text-gold-DEFAULT font-bold text-[10px] uppercase tracking-widest mb-5">
-                <Star size={10} fill="currentColor" /> The Founder
+          <div className="grid lg:grid-cols-[1fr_380px] gap-20 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.7 }}
+            >
+              <div className="flex items-center gap-3 mb-7">
+                <div className="h-px w-10 bg-gold-DEFAULT"></div>
+                <span className="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">The Founder</span>
               </div>
-              <h3 className="text-4xl font-heading font-medium mb-8 text-theme-text-main">
-                Basuram <span className="text-gold-DEFAULT">("Basu")</span> Bhandari
-              </h3>
-              <div className="space-y-5 text-theme-text-body text-lg leading-relaxed font-light">
+              <h2 className="text-4xl md:text-5xl font-heading font-medium text-theme-text-main mb-3 leading-tight">
+                Basuram <span className="text-gold-DEFAULT">"Basu"</span> Bhandari
+              </h2>
+              <p className="text-theme-text-light text-sm font-semibold uppercase tracking-widest mb-10">
+                Enrolled Agent · Founder & Principal
+              </p>
+
+              <div className="space-y-6 text-theme-text-body text-lg leading-relaxed font-light">
                 <p>
-                  With over a decade of experience, Basu established BMB Tax with a singular vision: to bring{' '}
-                  <strong className="text-theme-text-main font-semibold">Wall Street expertise to Main Street.</strong>
+                  With over a decade of hands-on experience, Basu established BMB Tax with a singular vision:{' '}
+                  <strong className="text-theme-text-main font-semibold">to bring Wall Street expertise to Main Street.</strong>
                 </p>
                 <p>
-                  Known for his meticulous attention to detail and personal approach, Basu treats every client&rsquo;s finances with the same care as his own.
+                  Known for his meticulous attention to detail and personal approach, Basu treats every client&rsquo;s
+                  finances with the same care as his own — building relationships that last years, not just seasons.
+                </p>
+                <p>
+                  His commitment to proactive planning means clients aren&rsquo;t just filing taxes — they&rsquo;re
+                  building sustainable financial futures with a trusted partner by their side.
                 </p>
               </div>
-              <div className="mt-8 p-5 bg-gold-DEFAULT/8 border border-gold-DEFAULT/20 rounded-2xl">
-                <p className="font-heading italic text-gold-DEFAULT text-xl">&ldquo;Trust is our greatest asset.&rdquo;</p>
-                <p className="text-theme-text-body text-sm mt-1 font-semibold">— Basu Bhandari, Founder</p>
+
+              <div className="mt-10 pt-10 border-t border-theme-border/50">
+                <blockquote className="relative pl-6 border-l-2 border-gold-DEFAULT">
+                  <p className="font-heading italic text-gold-DEFAULT text-2xl leading-snug">
+                    &ldquo;Trust is our greatest asset.&rdquo;
+                  </p>
+                  <footer className="mt-3 text-theme-text-body text-sm font-semibold">
+                    — Basu Bhandari, Founder
+                  </footer>
+                </blockquote>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
-              <div className="aspect-[4/5] rounded-3xl relative overflow-hidden bg-theme-surface border border-theme-border shadow-card">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-10">
-                    <div className="w-24 h-24 bg-gold-DEFAULT/15 border border-gold-DEFAULT/25 rounded-full flex items-center justify-center mx-auto mb-6 shadow-gold">
-                      <ShieldCheck size={40} className="text-gold-DEFAULT" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-theme-text-main mb-2">Integrity First</h4>
-                    <p className="text-theme-text-body text-sm tracking-widest uppercase mb-8">The Core of BMB Tax</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {['IRS Enrolled', 'TX Licensed', '5★ Rated', 'Since 2010'].map((badge, i) => (
-                        <div key={i} className="bg-theme-bg border border-theme-border/80 rounded-xl px-3 py-2 text-xs font-bold text-theme-text-main hover:text-gold-DEFAULT hover:border-gold-DEFAULT/50 transition-colors">{badge}</div>
-                      ))}
-                    </div>
+            {/* Credential card */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }}
+              className="lg:sticky lg:top-28"
+            >
+              <div className="bg-theme-card border border-theme-border rounded-2xl p-8">
+                <div className="w-14 h-14 bg-gold-DEFAULT/12 border border-gold-DEFAULT/25 rounded-xl flex items-center justify-center mb-6">
+                  <Award size={26} className="text-gold-DEFAULT" />
+                </div>
+                <h4 className="text-lg font-bold text-theme-text-main mb-1">Credentials</h4>
+                <p className="text-theme-text-light text-sm mb-6">Licenses & certifications</p>
+                <ul className="space-y-3">
+                  {['IRS Enrolled Agent', 'Texas Licensed CPA', '5★ Google Rated', 'QuickBooks Certified', 'ITIN Acceptance Agent', 'In Practice Since 2010'].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-theme-text-body">
+                      <CheckCircle2 size={15} className="text-gold-DEFAULT shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 pt-6 border-t border-theme-border/60">
+                  <div className="flex gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={14} className="text-gold-DEFAULT" fill="currentColor" />)}
                   </div>
+                  <p className="text-theme-text-light text-xs">Rated 5.0 on Google Reviews</p>
                 </div>
-                <div className="absolute top-4 right-4 w-20 h-20 bg-gold-DEFAULT/8 rounded-full blur-2xl"></div>
-                <div className="absolute bottom-4 left-4 w-24 h-24 bg-accent-indigo/8 rounded-full blur-2xl"></div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Locations */}
-      <section className="py-24 relative overflow-hidden bg-theme-bg">
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-heading font-medium text-theme-text-main mb-4">
-              Serving <span className="text-gold-DEFAULT">Texas</span>
-            </h2>
-            <p className="text-theme-text-body max-w-2xl mx-auto font-light">Proudly operating from two strategic locations.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              { branch: 'Euless Branch', sub: 'The Heart of DFW', addr: '1201 W Airport Fwy, Ste 259\nEuless, TX 76040', label: 'Main Office', phone: '(817) 554-2777', iconBg: 'bg-gold-DEFAULT/10', iconColor: 'text-gold-DEFAULT', iconBorder: 'border-gold-DEFAULT/20' },
-              { branch: 'Waco Branch', sub: 'Serving Central Texas', addr: '6625 Cascade Dr\nWoodway, TX 76712', label: 'Woodway Location', phone: '(254) 350-0233', iconBg: 'bg-accent-indigo/10', iconColor: 'text-accent-indigo', iconBorder: 'border-accent-indigo/20' },
-            ].map((loc, i) => (
-              <motion.div key={i} whileHover={{ y: -5 }} className="bg-theme-surface p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all hover:shadow-gold group">
-                <div className={`w-12 h-12 ${loc.iconBg} ${loc.iconBorder} border rounded-xl flex items-center justify-center ${loc.iconColor} mb-6 group-hover:scale-110 transition-transform`}>
-                  <MapPin size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-theme-text-main mb-1 group-hover:text-gold-DEFAULT transition-colors">{loc.branch}</h3>
-                <p className="text-theme-text-body mb-4 text-xs font-bold uppercase tracking-widest">{loc.sub}</p>
-                <p className="text-theme-text-body font-medium leading-relaxed whitespace-pre-line">{loc.addr}</p>
-                <div className="mt-6 pt-5 border-t border-theme-border flex justify-between items-center">
-                  <span className="font-bold text-theme-text-body uppercase tracking-wider text-xs">{loc.label}</span>
-                  <span className="text-gold-DEFAULT font-bold text-base">{loc.phone}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Locations ────────────────────────────────────────────── */}
+      <section className="py-28 relative overflow-hidden bg-theme-bg">
+        <div className="absolute right-0 bottom-0 w-[400px] h-[400px] bg-accent-indigo/5 blur-[140px] rounded-full pointer-events-none"></div>
 
-      {/* Values */}
-      <section className="py-24 relative overflow-hidden bg-theme-bgAlt">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-heading font-medium text-theme-text-main mb-4">
-              Our <span className="text-gold-DEFAULT">Core Values</span>
+          <div className="max-w-xl mb-14">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="h-px w-10 bg-gold-DEFAULT"></div>
+              <span className="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">Our Offices</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-medium text-theme-text-main leading-tight">
+              Serving <span className="text-gold-DEFAULT italic">Texas.</span>
             </h2>
-            <p className="text-theme-text-body max-w-xl mx-auto font-light">The principles that guide every decision we make for our clients.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((item, i) => (
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl">
+            {[
+              {
+                branch: 'Euless',
+                label: 'DFW · Main Office',
+                addr: '1201 W Airport Fwy, Ste 259\nEuless, TX 76040',
+                phone: '(817) 554-2777',
+                accent: 'text-gold-DEFAULT',
+                accentBg: 'bg-gold-DEFAULT/10',
+                accentBorder: 'border-gold-DEFAULT/20',
+              },
+              {
+                branch: 'Waco',
+                label: 'Central Texas · Woodway',
+                addr: '6625 Cascade Dr\nWoodway, TX 76712',
+                phone: '(254) 350-0233',
+                accent: 'text-accent-indigo',
+                accentBg: 'bg-accent-indigo/10',
+                accentBorder: 'border-accent-indigo/20',
+              },
+            ].map((loc, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -6 }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                viewport={{ once: true }}
-                className="text-center group bg-theme-surface p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 hover:shadow-gold transition-all cursor-pointer"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.12 }}
+                whileHover={{ y: -4 }}
+                className="group bg-theme-card p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/35 transition-all duration-300 hover:shadow-gold"
               >
-                <div className={`w-16 h-16 mx-auto ${item.iconBg} border ${item.border} rounded-2xl flex items-center justify-center ${item.iconColor} mb-6 group-hover:scale-110 transition-transform`}>
-                  <item.icon size={30} strokeWidth={1.5} />
+                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${loc.accentBg} border ${loc.accentBorder} ${loc.accent} text-[10px] font-bold uppercase tracking-widest mb-6`}>
+                  <MapPin size={10} /> {loc.label}
                 </div>
-                <h3 className="text-xl font-bold text-theme-text-main mb-3 group-hover:text-gold-DEFAULT transition-colors">{item.title}</h3>
-                <p className="text-theme-text-body leading-relaxed text-sm font-light">{item.desc}</p>
+                <h3 className="text-2xl font-heading font-medium text-theme-text-main mb-4 group-hover:text-gold-DEFAULT transition-colors">
+                  {loc.branch}
+                </h3>
+                <p className="text-theme-text-body font-medium leading-relaxed whitespace-pre-line text-sm mb-6">
+                  {loc.addr}
+                </p>
+                <a
+                  href={`tel:${loc.phone.replace(/\D/g, '')}`}
+                  className={`inline-flex items-center gap-2 text-sm font-bold ${loc.accent} hover:opacity-80 transition-opacity`}
+                >
+                  <Phone size={13} />
+                  {loc.phone}
+                </a>
               </motion.div>
             ))}
           </div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-14 text-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-dark to-gold-DEFAULT text-white px-10 py-4 rounded-full font-bold shadow-gold hover:shadow-gold-lg hover:-translate-y-1 transition-all">
-              Get Started Today
+        </div>
+      </section>
+
+      {/* ── Values ───────────────────────────────────────────────── */}
+      <section className="py-28 relative overflow-hidden bg-theme-bgAlt">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-[320px_1fr] gap-20 items-start">
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="h-px w-10 bg-gold-DEFAULT"></div>
+                <span className="text-gold-DEFAULT uppercase tracking-widest text-xs font-bold">What We Stand For</span>
+              </div>
+              <h2 className="text-4xl font-heading font-medium text-theme-text-main leading-tight mb-6">
+                Our Core <span className="text-gold-DEFAULT italic">Values.</span>
+              </h2>
+              <p className="text-theme-text-body font-light leading-relaxed">
+                The principles that guide every decision we make — for every client, every day.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-5">
+              {values.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ delay: i * 0.12 }}
+                  whileHover={{ y: -5 }}
+                  className="group bg-theme-card p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/35 transition-all duration-300 hover:shadow-gold"
+                >
+                  <div className={`w-12 h-12 ${item.iconBg} border ${item.border} rounded-xl flex items-center justify-center ${item.iconColor} mb-5 group-hover:scale-110 transition-transform`}>
+                    <item.icon size={22} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-base font-bold text-theme-text-main mb-3 group-hover:text-gold-DEFAULT transition-colors leading-snug">{item.title}</h3>
+                  <p className="text-theme-text-body text-sm font-light leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ delay: 0.2 }}
+            className="mt-20 flex flex-col sm:flex-row items-center gap-4"
+          >
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-dark to-gold-DEFAULT text-white px-10 py-4 rounded-full font-bold shadow-gold hover:shadow-gold-lg hover:-translate-y-1 transition-all"
+            >
+              Get Started Today <ArrowRight size={16} />
+            </Link>
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-theme-text-main font-semibold text-sm hover:text-gold-DEFAULT transition-colors group"
+            >
+              <span className="border-b border-theme-border/80 pb-0.5 group-hover:border-gold-DEFAULT">Explore our services</span>
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </div>

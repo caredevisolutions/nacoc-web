@@ -37,6 +37,7 @@ export default {
             bg: '#0D1117',        // Rich dark (GitHub-style charcoal, not washed-out navy)
             bgAlt: '#111827',     // Tailwind gray-900 — warm, accessible dark
             surface: '#1E293B',   // Slate-800 — clear card lift over bg
+            card: '#162032',      // Deep navy-blue — richer, more distinctive card bg
             surfaceHigh: '#263348', // Elevated card / hover state
             text: {
                 main: '#F1F5F9',  // Slate-100 — crisp near-white

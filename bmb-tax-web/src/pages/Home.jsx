@@ -52,7 +52,7 @@ const Home = () => {
                         </motion.h2>
                     </div>
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                        <Link to="/services" className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-theme-surface border border-theme-border/80 text-theme-text-main font-semibold text-sm hover:border-gold-DEFAULT/60 hover:text-gold-DEFAULT transition-all">
+                        <Link to="/services" className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-theme-card border border-theme-border/80 text-theme-text-main font-semibold text-sm hover:border-gold-DEFAULT/60 hover:text-gold-DEFAULT transition-all">
                             View All Services <ChevronRight size={15} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>
@@ -64,7 +64,7 @@ const Home = () => {
                             key={idx}
                             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.1 }}
                             whileHover={{ y: -6 }}
-                            className="group bg-theme-surface p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 hover:shadow-gold relative overflow-hidden cursor-pointer"
+                            className="group bg-theme-card p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 hover:shadow-gold relative overflow-hidden cursor-pointer"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-gold-DEFAULT/0 to-gold-DEFAULT/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div className={`w-12 h-12 ${s.bg} ${s.border} border rounded-xl flex items-center justify-center ${s.color} mb-5 group-hover:scale-110 transition-transform duration-300`}>
@@ -168,7 +168,7 @@ const Home = () => {
                         </motion.h2>
                     </div>
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                        <Link to="/testimonials" className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-theme-surface border border-theme-border/80 text-theme-text-main font-semibold text-sm hover:border-gold-DEFAULT/50 hover:text-gold-DEFAULT transition-all">
+                        <Link to="/testimonials" className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-theme-card border border-theme-border/80 text-theme-text-main font-semibold text-sm hover:border-gold-DEFAULT/50 hover:text-gold-DEFAULT transition-all">
                             All Reviews <ChevronRight size={15} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>
@@ -180,7 +180,7 @@ const Home = () => {
                             key={idx}
                             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.12 }}
                             whileHover={{ y: -8 }}
-                            className="bg-theme-surface p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 hover:shadow-gold relative group cursor-pointer"
+                            className="bg-theme-card p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 hover:shadow-gold relative group cursor-pointer"
                         >
                             <Quote className="absolute top-6 right-6 text-theme-border group-hover:text-gold-DEFAULT/20 rotate-12 transition-colors duration-300" size={44} fill="currentColor" />
                             <div className="flex gap-1 text-gold-DEFAULT mb-5">
@@ -203,29 +203,29 @@ const Home = () => {
         </section>
 
         {/* ── CTA Strip ─────────────────────────────────────────────── */}
-        <section className="py-20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-gold-dark via-gold-DEFAULT to-amber-400"></div>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff18_1px,transparent_1px),linear-gradient(to_bottom,#ffffff18_1px,transparent_1px)] bg-[size:32px_32px]"></div>
-            <div className="absolute top-0 right-0 w-[400px] h-full bg-white/10 blur-[80px] rounded-full pointer-events-none"></div>
+        <section className="py-24 relative overflow-hidden bg-theme-bg border-y border-theme-border/60">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-gold-DEFAULT/6 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-gold-DEFAULT/5 blur-[60px] rounded-full pointer-events-none"></div>
 
             <div className="container mx-auto px-6 relative z-10 text-center">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-white font-bold tracking-widest uppercase text-[10px] mb-6">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/25 text-gold-DEFAULT font-bold tracking-widest uppercase text-[10px] mb-8">
                         <Sparkles size={11} /> Limited Slots This Season
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-heading font-medium text-white mb-4 leading-tight">
+                    <h2 className="text-4xl md:text-5xl font-heading font-medium text-theme-text-main mb-5 leading-tight">
                         Ready to Transform Your <br/>
-                        <span className="italic text-amber-100">Financial Future?</span>
+                        <span className="italic text-gold-DEFAULT">Financial Future?</span>
                     </h2>
-                    <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto font-light">
+                    <p className="text-theme-text-body text-lg mb-10 max-w-xl mx-auto font-light">
                         Join 500+ Texans who trust BMB Tax for expert guidance every year.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
-                        <Link to="/contact" className="bg-white text-gold-dark font-bold px-10 py-4 rounded-full hover:bg-amber-50 hover:-translate-y-1 hover:shadow-2xl transition-all shadow-xl flex items-center gap-2 group">
+                        <Link to="/contact" className="bg-gradient-to-r from-gold-dark to-gold-DEFAULT text-white font-bold px-10 py-4 rounded-full hover:-translate-y-1 hover:shadow-gold-lg transition-all shadow-gold flex items-center gap-2 group">
                             Book Free Consultation
                             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <Link to="/services" className="bg-white/15 border border-white/40 text-white font-semibold px-10 py-4 rounded-full hover:bg-white/25 hover:-translate-y-1 transition-all flex items-center gap-2 group backdrop-blur-sm">
+                        <Link to="/services" className="bg-theme-surface border border-theme-border text-theme-text-main font-semibold px-10 py-4 rounded-full hover:border-gold-DEFAULT/50 hover:text-gold-DEFAULT hover:-translate-y-1 transition-all flex items-center gap-2 group">
                             Explore Services
                             <ChevronRight size={15} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
