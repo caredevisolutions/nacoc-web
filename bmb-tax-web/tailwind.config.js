@@ -34,16 +34,16 @@ export default {
         },
         // Dark Theme Palette
         theme: {
-            bg: '#0F1117',        // Deep navy-black
-            bgAlt: '#161B27',     // Slightly lighter dark
-            surface: '#1C2333',   // Card surface (dark navy)
-            surfaceHigh: '#232B3E', // Elevated card
+            bg: '#0D1117',        // Rich dark (GitHub-style charcoal, not washed-out navy)
+            bgAlt: '#111827',     // Tailwind gray-900 — warm, accessible dark
+            surface: '#1E293B',   // Slate-800 — clear card lift over bg
+            surfaceHigh: '#263348', // Elevated card / hover state
             text: {
-                main: '#F4F6FA',  // Near-white
-                body: '#A8B3CF',  // Muted blue-grey
-                light: '#5C6B8A', // Dim
+                main: '#F1F5F9',  // Slate-100 — crisp near-white
+                body: '#CBD5E1',  // Slate-300 — high-contrast readable body text
+                light: '#94A3B8', // Slate-400 — tertiary / labels
             },
-            border: '#2A3347',    // Subtle dark border
+            border: '#334155',    // Slate-700 — clearly visible dividers
         },
         // Keeping legacy names momentarily to prevent immediate crash, but will replace usage
         black: {
@@ -57,12 +57,12 @@ export default {
         heading: ['Playfair Display', 'serif'],
       },
       boxShadow: {
-        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.35)',
-        'glow': '0 0 20px rgba(212, 175, 55, 0.5)',
-        'gold': '0 8px 35px -4px rgba(212,175,55,0.40)',
-        'gold-lg': '0 12px 50px -6px rgba(212,175,55,0.55)',
-        'colored': '0 8px 30px -4px rgba(99,102,241,0.30)',
-        'card': '0 4px 30px rgba(0,0,0,0.40)',
+        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.45)',
+        'glow': '0 0 25px rgba(212, 175, 55, 0.55)',
+        'gold': '0 8px 35px -4px rgba(212,175,55,0.45)',
+        'gold-lg': '0 14px 55px -6px rgba(212,175,55,0.65)',
+        'colored': '0 8px 30px -4px rgba(99,102,241,0.35)',
+        'card': '0 4px 30px rgba(0,0,0,0.50)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

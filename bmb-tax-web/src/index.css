@@ -5,7 +5,7 @@
 @layer base {
   body {
     @apply font-sans antialiased text-theme-text-body overflow-x-hidden;
-    background: #0F1117;
+    background: #0D1117;
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -17,10 +17,10 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0F1117;
+    background: #0D1117;
   }
   ::-webkit-scrollbar-thumb {
-    background: #2A3347;
+    background: #334155;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {

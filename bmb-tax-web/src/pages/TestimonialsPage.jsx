@@ -5,12 +5,12 @@ import { Star, Quote, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const avatarColors = [
-  'from-gold-light to-amber-100 text-gold-dark',
-  'from-indigo-100 to-blue-50 text-accent-indigo',
-  'from-emerald-100 to-teal-50 text-accent-emerald',
-  'from-violet-100 to-purple-50 text-accent-violet',
-  'from-rose-100 to-pink-50 text-accent-rose',
-  'from-sky-100 to-cyan-50 text-accent-sky',
+  'from-gold-DEFAULT/30 to-gold-dark/20 text-gold-DEFAULT',
+  'from-accent-indigo/30 to-accent-indigo/10 text-accent-indigo',
+  'from-accent-emerald/30 to-accent-emerald/10 text-accent-emerald',
+  'from-accent-violet/30 to-accent-violet/10 text-accent-violet',
+  'from-accent-rose/30 to-accent-rose/10 text-accent-rose',
+  'from-accent-sky/30 to-accent-sky/10 text-accent-sky',
 ];
 
 const testimonials = [
@@ -30,17 +30,16 @@ const TestimonialsPage = () => {
         <meta name="description" content="Read what our happy clients in Euless, TX have to say about our tax and financial services. 5.0 Star Rated on Google." />
       </Helmet>
 
-      <section className="pt-32 pb-24 min-h-screen relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ede8df] via-[#e8e2d4] to-[#f0ebe3]"></div>
-        <div className="absolute top-0 right-0 w-[45%] h-[55%] bg-gold-light/20 blur-[130px] rounded-full pointer-events-none z-[1]"></div>
-        <div className="absolute bottom-0 left-0 w-[35%] h-[40%] bg-indigo-100/20 blur-[100px] rounded-full pointer-events-none z-[1]"></div>
+      <section className="pt-32 pb-24 min-h-screen relative overflow-hidden bg-theme-bg">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div className="absolute top-0 right-0 w-[45%] h-[55%] bg-gold-DEFAULT/10 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+        <div className="absolute bottom-0 left-0 w-[35%] h-[40%] bg-accent-indigo/8 blur-[120px] rounded-full pointer-events-none z-[1]"></div>
 
         <div className="container mx-auto px-6 relative z-10">
-          {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-gold-DEFAULT/20 text-gold-dark font-bold tracking-widest uppercase text-[10px] mb-6 shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-DEFAULT/10 border border-gold-DEFAULT/25 text-gold-DEFAULT font-bold tracking-widest uppercase text-[10px] mb-6"
             >
               <Sparkles size={11} /> Success Stories
             </motion.div>
@@ -56,21 +55,18 @@ const TestimonialsPage = () => {
             >
               See why hundreds of individuals and businesses in Euless and Waco trust us with their financial future.
             </motion.p>
-
-            {/* Star rating badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-white/70 backdrop-blur-sm border border-gold-DEFAULT/20 rounded-2xl shadow-sm"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-theme-surface border border-theme-border/80 rounded-2xl"
             >
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} className="text-gold-DEFAULT" fill="currentColor" />)}
               </div>
               <span className="text-theme-text-main font-bold text-sm">5.0</span>
-              <span className="text-theme-text-light text-sm">on Google Reviews</span>
+              <span className="text-theme-text-body text-sm">on Google Reviews</span>
             </motion.div>
           </div>
 
-          {/* Cards grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((t, idx) => (
               <motion.div
@@ -78,25 +74,22 @@ const TestimonialsPage = () => {
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: idx * 0.08 }}
                 whileHover={{ y: -8 }}
-                className="bg-white/70 backdrop-blur-sm p-7 rounded-2xl border border-white/80 hover:border-gold-DEFAULT/30 transition-all duration-300 relative group shadow-soft hover:shadow-gold"
+                className="bg-theme-surface p-7 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/40 transition-all duration-300 relative group hover:shadow-gold cursor-pointer"
               >
-                <Quote className="absolute top-6 right-6 text-gold-light/30 group-hover:text-gold-DEFAULT/20 rotate-12 transition-colors duration-300" size={56} fill="currentColor" />
-
+                <Quote className="absolute top-6 right-6 text-theme-border group-hover:text-gold-DEFAULT/25 rotate-12 transition-colors duration-300" size={50} fill="currentColor" />
                 <div className="flex gap-1 text-gold-DEFAULT mb-5 relative z-10">
                   {[...Array(t.stars)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                 </div>
-
-                <p className="text-theme-text-body mb-6 leading-relaxed italic relative z-10 text-sm font-medium">
+                <p className="text-theme-text-body mb-6 leading-relaxed italic relative z-10 text-sm">
                   &ldquo;{t.text}&rdquo;
                 </p>
-
                 <div className="flex items-center gap-3 relative z-10">
-                  <div className={`w-11 h-11 bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} rounded-full flex items-center justify-center font-bold text-sm shadow-sm border border-white/60`}>
+                  <div className={`w-11 h-11 bg-gradient-to-br ${avatarColors[idx % avatarColors.length]} rounded-full flex items-center justify-center font-bold text-sm border border-white/10`}>
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-bold text-theme-text-main text-sm group-hover:text-gold-dark transition-colors">{t.name}</h4>
-                    <p className="text-xs text-theme-text-light uppercase tracking-wide">{t.role}</p>
+                    <h4 className="font-bold text-theme-text-main text-sm group-hover:text-gold-DEFAULT transition-colors">{t.name}</h4>
+                    <p className="text-xs text-theme-text-body uppercase tracking-wide">{t.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -115,10 +108,10 @@ const TestimonialsPage = () => {
               <h2 className="text-3xl md:text-4xl font-heading font-medium text-white mb-4">Ready to join our happy clients?</h2>
               <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto font-light">Experience the difference of a dedicated financial partner in Texas.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-gold-dark px-10 py-4 rounded-full font-bold hover:-translate-y-1 transition-all shadow-xl hover:shadow-2xl">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-gold-dark px-10 py-4 rounded-full font-bold hover:-translate-y-1 hover:shadow-2xl transition-all shadow-xl">
                   Schedule a Consultation <ArrowRight size={16} />
                 </Link>
-                <Link to="/services" className="inline-flex items-center gap-2 border-2 border-white/60 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all">
+                <Link to="/services" className="inline-flex items-center gap-2 border-2 border-white/60 text-white px-8 py-4 rounded-full font-bold hover:bg-white/15 hover:-translate-y-1 transition-all">
                   Explore Services
                 </Link>
               </div>
@@ -131,3 +124,4 @@ const TestimonialsPage = () => {
 };
 
 export default TestimonialsPage;
+
