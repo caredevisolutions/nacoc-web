@@ -138,3 +138,128 @@ export const blogsData = [
       image: "https://nacoc.org/wp-content/uploads/2021/11/technology-esports-1.jpeg"
     }
 ];
+
+export const MOCK_BUSINESSES = [
+    { 
+        id: 1, 
+        name: "Yeti Homes", 
+        category: "Real Estate", 
+        address: "Irving, TX", 
+        phone: "+1 214-555-0101", 
+        email: "contact@yetihomes.com",
+        website: "yetihomes.com", 
+        featured: true,
+        description: "Yeti Homes is a premier real estate agency serving the vibrant community of Irving and the greater Dallas-Fort Worth area. We specialize in residential sales, commercial leasing, and property management. Our team of experienced agents is dedicated to helping you find your dream home or the perfect investment property.",
+        hours: "Mon-Fri: 9AM - 6PM, Sat: 10AM - 4PM",
+        social: {
+            facebook: "#",
+            linkedin: "#",
+            instagram: "#"
+        },
+        services: ["Residential Sales", "Commercial Leasing", "Property Management", "Investment Consulting"],
+        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    },
+    { 
+        id: 2,
+        name: "Smriti CPA", 
+        category: "Financial Services", 
+        address: "Euless, TX", 
+        phone: "+1 817-555-0102", 
+        email: "info@smriticpa.com",
+        website: "smriticpa.com", 
+        featured: true,
+        description: "Smriti CPA provides comprehensive accounting and tax services for individuals and small businesses. From tax planning and preparation to bookkeeping and payroll, we handle the numbers so you can focus on growing your business.",
+        hours: "Mon-Fri: 8AM - 5PM",
+        social: {
+            linkedin: "#",
+        },
+        services: ["Tax Preparation", "Bookkeeping", "Payroll Services", "Financial Planning"],
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+        id: 3, 
+        name: "NepIT LLC", 
+        category: "Technology", 
+        address: "Dallas, TX", 
+        phone: "+1 469-555-0103", 
+        website: "nepit.com", 
+        featured: true, 
+        description: "NepIT LLC is a leading IT solutions provider offering software development, IT consulting, and cloud infrastructure services. We empower businesses with cutting-edge technology to drive innovation and efficiency.",
+        hours: "Mon-Fri: 9AM - 5PM",
+        social: {
+            facebook: "#",
+            twitter: "#",
+            linkedin: "#"
+        },
+        services: ["Software Development", "IT Consulting", "Cloud Services", "Cybersecurity"],
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+        id: 4, 
+        name: "Curry Leaf Restaurant", 
+        category: "Restaurants", 
+        address: "1800 Valley View Lane, Irving", 
+        phone: "+1 972-555-0104", 
+        website: "curryleaf.com", 
+        featured: false, 
+        description: "Experience the authentic flavors of Nepal and India at Curry Leaf Restaurant. We use fresh ingredients and traditional spices to create unforgettable dishes. Join us for lunch, dinner, or catering for your special events.",
+        hours: "Tue-Sun: 11AM - 10PM",
+        social: {
+            facebook: "#",
+            instagram: "#"
+        },
+        services: ["Dine-in", "Takeout", "Catering", "Private Events"],
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    }, 
+    {
+        id: 5,
+        name: "SmallBusinessHelpDFW", 
+        category: "Consulting", 
+        address: "Plano, TX", 
+        phone: "+1 214-555-0105", 
+        website: "sbhdfw.com", 
+        featured: true,
+        description: "We help small businesses thrive in the DFW metroplex. Our consulting services cover business strategy, marketing, legal compliance, and operational efficiency.",
+        hours: "Mon-Fri: 9AM - 5PM",
+        social: {
+            linkedin: "#"
+        },
+        services: ["Business Strategy", "Marketing Consulting", "Legal Compliance", "Operations"],
+        image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+        id: 6,
+        name: "Everest Insurance", 
+        category: "Insurance", 
+        address: "Fort Worth, TX", 
+        phone: "+1 817-555-0106", 
+        website: "everestins.com", 
+        featured: false,
+        description: "Protecting what matters most. Everest Insurance offers a wide range of insurance products including auto, home, life, and commercial insurance. We are committed to providing personalized coverage at competitive rates.",
+        hours: "Mon-Fri: 8:30AM - 5:30PM",
+        social: {
+            facebook: "#",
+            linkedin: "#"
+        },
+        services: ["Auto Insurance", "Home Insurance", "Life Insurance", "Business Insurance"],
+        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    }
+];
+
+export const MOCK_MEMBERS = [
+    { id: 1, name: "Ram Sharma", email: "ram@example.com", phone: "214-555-0101", type: "Business", status: "Active", joinDate: "2023-01-15", tier: "Gold", paid: true, amount: 500 },
+    { id: 2, name: "Sita Patel", email: "sita@example.com", phone: "469-555-0202", type: "Individual", status: "Active", joinDate: "2023-02-20", tier: "Standard", paid: true, amount: 100 },
+    { id: 3, name: "Hari Krishna", email: "hari@example.com", phone: "817-555-0303", type: "Student", status: "Inactive", joinDate: "2023-03-10", tier: "Student", paid: false, amount: 50 },
+    { id: 4, name: "Gita Rai", email: "gita@example.com", phone: "972-555-0404", type: "Business", status: "Active", joinDate: "2023-10-05", tier: "Platinum", paid: true, amount: 1000 },
+    { id: 5, name: "Bibek Thapa", email: "bibek@example.com", phone: "214-555-0505", type: "Individual", status: "Active", joinDate: "2023-11-12", tier: "Standard", paid: true, amount: 100 },
+    { id: 6, name: "Nita Shah", email: "nita@example.com", phone: "817-555-0606", type: "Business", status: "Pending", joinDate: "2024-01-05", tier: "Gold", paid: false, amount: 500 },
+    { id: 7, name: "John Doe", email: "john@example.com", phone: "469-555-0707", type: "Individual", status: "Active", joinDate: "2024-01-18", tier: "Standard", paid: true, amount: 100 },
+];
+
+export const MOCK_EVENTS_ADMIN = [
+    { id: 1, title: "10th Annual Entrepreneurship Gala", date: "2025-08-09", location: "Irving Convention Center", status: "Upcoming", attendees: 156, type: "Gala" },
+    { id: 2, title: "Gala Dinner 2024", date: "2024-09-05", location: "Embassy Suites", status: "Completed", attendees: 420, type: "Gala" },
+    { id: 3, title: "Small Business Workshop", date: "2024-03-10", location: "Online (Zoom)", status: "Completed", attendees: 45, type: "Workshop" },
+    { id: 4, title: "Networking Mixer", date: "2024-01-20", location: "Curry Leaf Restaurant", status: "Completed", attendees: 60, type: "Networking" },
+    { id: 5, title: "Tax Filing Seminar", date: "2024-02-05", location: "Euless Library", status: "Completed", attendees: 30, type: "Seminar" },
+];

@@ -94,7 +94,7 @@ const Blogs = () => {
                         </div>
                     </div>
                     
-                    <Link to={`/blogs/${post.id}`} className="text-slate-900 font-bold text-sm inline-flex items-center hover:text-primary transition-colors group/btn">
+                    <Link to={`/blogs/${post.slug || post.id}`} className="text-slate-900 font-bold text-sm inline-flex items-center hover:text-primary transition-colors group/btn">
                        Read Full Story <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                  </div>

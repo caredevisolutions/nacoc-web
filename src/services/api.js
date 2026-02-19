@@ -29,6 +29,19 @@ export const api = {
     }
   },
 
+  getPostBySlug: async (slug) => {
+    try {
+      // WP API filters by slug returning an array
+      const response = await fetch(`${BASE_URL}/posts?slug=${slug}&_embed`);
+      if (!response.ok) throw new Error('Failed to fetch post');
+      const data = await response.json();
+      return data && data.length > 0 ? data[0] : null;
+    } catch (error) {
+      console.error('Error fetching post by slug:', error);
+      return null;
+    }
+  },
+
   // Events (Tribe Events API V1)
   getEvents: async (page = 1, perPage = 9) => {
     try {

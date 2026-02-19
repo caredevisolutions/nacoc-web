@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, ArrowLeft, Share2 } from 'lucide-react';
-import { api } from '../services/api';
+import { useData } from '../context/DataContext';
 
 const EventDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
+  const { events } = useData();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEvent = async () => {
-      setLoading(true);
-      const data = await api.getEventById(id);
-      setEvent(data);
-      setLoading(false);
-    };
-    fetchEvent();
-  }, [id]);
+    if (events && events.length > 0) {
+        // Try to find by slug first, then ID for backward compatibility
+        const found = events.find(e => e.slug === slug || e.id.toString() === slug);
+        setEvent(found);
+        setLoading(false);
+    }
+  }, [slug, events]);
 
   if (loading) {
      return (
@@ -38,17 +38,22 @@ const EventDetails = () => {
     );
   }
 
-  // Data Extraction (Tribe V1 API)
-  const image = event.image?.url || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
+  // Data Extraction
+  const image = event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   
-  const dateStr = event.start_date; 
-  const dateObj = new Date(dateStr);
+  // Handle different date formats (mock data might be "August 9, 2025" or ISO)
+  let dateObj = new Date(event.date || event.start_date);
+  if (isNaN(dateObj.getTime())) {
+      dateObj = new Date(); // Fallback
+  }
+  
   const dateFormatted = dateObj.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const timeFormatted = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // Time from data or default
+  const timeFormatted = event.time || dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const isFutureEvent = dateObj > new Date();
 
   // Location logic
-  let locationStr = 'Online';
+  let locationStr = event.location || 'Online';
   if (event.venue && typeof event.venue === 'object') {
       const parts = [];
       if (event.venue.venue) parts.push(event.venue.venue);
@@ -56,9 +61,6 @@ const EventDetails = () => {
       if (event.venue.city) parts.push(event.venue.city);
       if (event.venue.state) parts.push(event.venue.state);
       if (parts.length > 0) locationStr = parts.join(', ');
-  } else if (typeof event.venue === 'string') {
-      // In rare cases if API returns a string
-      locationStr = event.venue;
   }
 
   return (
@@ -106,7 +108,7 @@ const EventDetails = () => {
       <div className="container mx-auto px-6 -mt-10 relative z-20 pb-20">
         <div className="flex flex-col lg:flex-row gap-12">
             
-           {/* Main Content (Order 2 on mobile, 1 on desktop) */}
+           {/* Main Content */}
            <div className="lg:w-2/3 order-2 lg:order-1">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -114,13 +116,11 @@ const EventDetails = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 prose prose-lg max-w-none text-slate-600 leading-relaxed font-body prose-headings:font-heading prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-primary prose-img:rounded-2xl"
               >
-                  {/* Render content */}
-                  {/* Note: Tribe V1 description often wraps content in basic HTML needs */}
                   <div dangerouslySetInnerHTML={{ __html: event.description }} />
               </motion.div>
            </div>
 
-           {/* Sidebar Actions (Order 1 on mobile, 2 on desktop for visual hierarchy of actions) */}
+           {/* Sidebar Actions */}
            <div className="lg:w-1/3 order-1 lg:order-2">
               <motion.div 
                  initial={{ opacity: 0, x: 20 }}

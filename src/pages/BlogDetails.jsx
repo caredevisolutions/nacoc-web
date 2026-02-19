@@ -5,7 +5,7 @@ import { User, Calendar, Facebook, Twitter, Linkedin, Share2, ArrowLeft } from '
 import { api } from '../services/api';
 
 const BlogDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [relatedPosts, setRelatedPosts] = useState([]);
@@ -13,18 +13,28 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       setLoading(true);
-      const data = await api.getPostById(id);
+      // Try fetching by slug first, fallback to ID if it looks like an ID (numeric)
+      // Since our route is /:slug, the param is named slug even if it's an ID
+      let data = null;
+      if (!isNaN(slug)) {
+          data = await api.getPostById(slug);
+      } else {
+          data = await api.getPostBySlug(slug);
+      }
+      
       setPost(data);
       
-      // Fetch related (recent) posts
-      const recent = await api.getPosts(1, 4);
-      setRelatedPosts(recent.filter(p => p.id !== parseInt(id)).slice(0, 2));
+      if (data) {
+        // Fetch related (recent) posts
+        const recent = await api.getPosts(1, 4);
+        setRelatedPosts(recent.filter(p => p.id !== data.id).slice(0, 2));
+      }
       
       setLoading(false);
     };
 
     fetchPostData();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
      return (
@@ -122,7 +132,7 @@ const BlogDetails = () => {
                     <h3 className="text-xl font-bold text-slate-900 mb-8 font-heading">Related Articles</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {relatedPosts.map(related => (
-                            <Link to={`/blogs/${related.id}`} key={related.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg transition-all flex gap-4 items-start border border-slate-100">
+                            <Link to={`/blogs/${related.slug || related.id}`} key={related.id} className="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg transition-all flex gap-4 items-start border border-slate-100">
                                 <img 
                                     src={related._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'https://via.placeholder.com/150'} 
                                     alt={related.title.rendered} 
