@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Calculator, FileText, Briefcase, TrendingUp, DollarSign, PenTool, ShieldCheck } from 'lucide-react';
+import { Calculator, FileText, Briefcase, TrendingUp, DollarSign, PenTool } from 'lucide-react';
 
 const servicesList = [
   {
@@ -36,7 +36,7 @@ const servicesList = [
   },
   {
     icon: PenTool,
-    title: "Notary Public",
+    title: "Notary Public & More",
     description: "Convenient and authorized notary services for your important legal and financial documents.",
     features: ["Affidavits", "Contracts", "Loan Documents", "Real Estate Deeds"]
   }
@@ -50,17 +50,20 @@ const ServicesPage = () => {
         <meta name="description" content="Comprehensive financial services including tax preparation, bookkeeping, payroll, and consulting in Euless, TX." />
       </Helmet>
 
-      <div className="bg-black-rich min-h-screen pt-32 pb-24">
-        <div className="container mx-auto px-6">
+      <section className="bg-theme-bg min-h-screen pt-32 pb-24 relative overflow-hidden">
+        {/* Decorative background element */}
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-gold-light/5 to-transparent blur-3xl rounded-full pointer-events-none"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
              <div className="text-center max-w-3xl mx-auto mb-16">
                 <motion.h1 
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-4xl md:text-5xl font-heading font-bold mb-6 text-white"
+                    className="text-4xl md:text-5xl font-heading font-medium mb-6 text-theme-text-main"
                 >
-                    Expertise You Can <span className="text-gold-DEFAULT">Count On.</span>
+                    Expertise You Can <span className="text-gold-DEFAULT italic">Count On.</span>
                 </motion.h1>
-                <p className="text-xl text-slate-300">
+                <p className="text-xl text-theme-text-body font-light">
                     Comprehensive financial solutions tailored to your unique needs. From personal taxes to corporate strategy.
                 </p>
             </div>
@@ -83,20 +86,20 @@ const ServicesPage = () => {
                             }
                         }}
                         whileHover={{ y: -5 }}
-                        className="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-gold-DEFAULT/30 transition-all duration-300 group shadow-md hover:shadow-lg hover:shadow-gold-DEFAULT/10"
+                        className="bg-white p-8 rounded-2xl border border-theme-border hover:border-gold-DEFAULT/30 transition-all duration-300 group shadow-soft hover:shadow-xl"
                     >
-                        <div className="w-14 h-14 bg-gold-DEFAULT/10 rounded-lg flex items-center justify-center text-gold-DEFAULT mb-6 group-hover:scale-110 transition-transform duration-300 border border-gold-DEFAULT/20">
+                        <div className="w-14 h-14 bg-theme-bg rounded-xl flex items-center justify-center text-gold-DEFAULT mb-6 group-hover:scale-110 transition-transform duration-300 border border-theme-border group-hover:border-gold-DEFAULT/50 shadow-sm">
                             <service.icon size={28} strokeWidth={1.5} />
                         </div>
                         
-                        <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                        <p className="text-slate-400 mb-6 leading-relaxed text-sm">
+                        <h3 className="text-2xl font-heading font-medium text-theme-text-main mb-4">{service.title}</h3>
+                        <p className="text-theme-text-body mb-6 leading-relaxed text-sm font-light">
                             {service.description}
                         </p>
                         
-                        <ul className="space-y-3 border-t border-slate-800 pt-6">
+                        <ul className="space-y-3 border-t border-theme-border/60 pt-6">
                             {service.features.map((feature, i) => (
-                                <li key={i} className="flex items-center text-sm text-slate-400">
+                                <li key={i} className="flex items-center text-sm text-theme-text-body font-medium">
                                     <div className="w-1.5 h-1.5 rounded-full mr-3 bg-gold-DEFAULT"></div>
                                     {feature}
                                 </li>
@@ -106,7 +109,7 @@ const ServicesPage = () => {
                 ))}
             </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

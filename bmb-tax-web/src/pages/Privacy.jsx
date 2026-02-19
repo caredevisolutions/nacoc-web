@@ -7,10 +7,10 @@ const Privacy = () => {
       <Helmet>
         <title>Privacy Policy | BMB Tax & Financial Service</title>
       </Helmet>
-      <div className="bg-black-rich min-h-screen pt-32 pb-24 text-neutral-300">
+      <div className="bg-theme-bg min-h-screen pt-32 pb-24 text-theme-text-body">
         <div className="container mx-auto px-6 max-w-4xl">
-            <h1 className="text-4xl font-heading font-bold mb-8 text-white">Privacy Policy</h1>
-            <div className="prose lg:prose-lg prose-headings:text-white prose-p:text-neutral-300 prose-li:text-neutral-300 prose-strong:text-gold-DEFAULT">
+            <h1 className="text-4xl font-heading font-medium mb-8 text-theme-text-main">Privacy Policy</h1>
+            <div className="prose lg:prose-lg prose-headings:text-theme-text-main prose-p:text-theme-text-body prose-li:text-theme-text-body prose-strong:text-theme-text-main prose-a:text-gold-DEFAULT hover:prose-a:text-gold-dark">
                 <p>Last Updated: {new Date().toLocaleDateString()}</p>
                 <p>We are committed to protecting your personal information and your right to privacy.</p>
                 
@@ -32,7 +32,7 @@ const Privacy = () => {
 
                 <h3>3. Data Security</h3>
                 <p>We employ industry-standard security measures, including bank-grade encryption and secure file storage systems, to protect your data from unauthorized access.</p>
-
+                
                 <h3>4. Contact Us</h3>
                 <p>If you have any questions about this policy, please contact us at (254) 350-0233.</p>
             </div>

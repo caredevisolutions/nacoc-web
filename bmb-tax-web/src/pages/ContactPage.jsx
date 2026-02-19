@@ -8,7 +8,7 @@ const ContactPage = () => {
         <Helmet>
             <title>Contact Us | BMB Tax & Financial Service</title>
         </Helmet>
-        <div className="pt-20 bg-black-rich min-h-screen">
+        <div className="pt-20 bg-theme-bg min-h-screen">
             <Contact />
         </div>
     </>

@@ -19,19 +19,35 @@ export default {
         },
         gold: {
           DEFAULT: '#D4AF37', // Genuine Metallic Gold
-          light: '#F2D680',   // Champagne Gold
-          dark: '#AA882C',    // Antique Gold
-          muted: '#8A7638',   // Bronze-ish for subdued text
+          light: '#F5E6BE',   // Soft Champagne Gold for backgrounds
+          dark: '#B4942B',    // Darker Gold for text/borders
+          muted: '#E5D5A0',   // Muted Gold for subtle elements
         },
+        // Modern Light Theme Palette
+        theme: {
+            bg: '#FAFAFA',       // Main background (Off-white)
+            surface: '#FFFFFF',  // Card background (White)
+            text: {
+                main: '#18181B', // Zinc-900 (Almost Black)
+                body: '#52525B', // Zinc-600 (Dark Gray)
+                light: '#A1A1AA', // Zinc-400 (Light Gray)
+            },
+            border: '#E4E4E7',   // Zinc-200 (Light Gray Border)
+        },
+        // Keeping legacy names momentarily to prevent immediate crash, but will replace usage
         black: {
-          rich: '#1C1C1E', // Apple Dark Gray - Softer than pure black
-          card: '#2C2C2E', // Slightly lighter card background
-          light: '#3A3A3C', // Even lighter for borders/hovers
+          rich: '#18181B', // Replacing with Dark Charcoal for dark mode sections if needed
+          card: '#27272A', 
+          light: '#3F3F46',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         heading: ['Playfair Display', 'serif'],
+      },
+      boxShadow: {
+        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+        'glow': '0 0 15px rgba(212, 175, 55, 0.3)',
       }
     },
   },
