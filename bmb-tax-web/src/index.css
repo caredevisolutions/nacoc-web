@@ -4,21 +4,27 @@
 
 @layer base {
   body {
-    @apply font-sans antialiased bg-theme-bg text-theme-text-body overflow-x-hidden;
+    @apply font-sans antialiased text-theme-text-body overflow-x-hidden;
+    background: #0F1117;
+    min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading text-theme-text-main;
   }
   
-  /* Modern Scrollbar - Light Theme */
+  /* Modern Scrollbar - Dark Theme */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-theme-bg;
+    background: #0F1117;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-theme-border rounded-full hover:bg-gold-muted transition-colors;
+    background: #2A3347;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
   }
   
   /* Custom selection color */

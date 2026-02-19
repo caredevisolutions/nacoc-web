@@ -23,16 +23,27 @@ export default {
           dark: '#B4942B',    // Darker Gold for text/borders
           muted: '#E5D5A0',   // Muted Gold for subtle elements
         },
-        // Modern Light Theme Palette
+        // Accent palette
+        accent: {
+          indigo: '#6366F1',
+          emerald: '#10B981',
+          rose: '#F43F5E',
+          amber: '#F59E0B',
+          sky: '#0EA5E9',
+          violet: '#8B5CF6',
+        },
+        // Dark Theme Palette
         theme: {
-            bg: '#FAFAFA',       // Main background (Off-white)
-            surface: '#FFFFFF',  // Card background (White)
+            bg: '#0F1117',        // Deep navy-black
+            bgAlt: '#161B27',     // Slightly lighter dark
+            surface: '#1C2333',   // Card surface (dark navy)
+            surfaceHigh: '#232B3E', // Elevated card
             text: {
-                main: '#18181B', // Zinc-900 (Almost Black)
-                body: '#52525B', // Zinc-600 (Dark Gray)
-                light: '#A1A1AA', // Zinc-400 (Light Gray)
+                main: '#F4F6FA',  // Near-white
+                body: '#A8B3CF',  // Muted blue-grey
+                light: '#5C6B8A', // Dim
             },
-            border: '#E4E4E7',   // Zinc-200 (Light Gray Border)
+            border: '#2A3347',    // Subtle dark border
         },
         // Keeping legacy names momentarily to prevent immediate crash, but will replace usage
         black: {
@@ -46,9 +57,27 @@ export default {
         heading: ['Playfair Display', 'serif'],
       },
       boxShadow: {
-        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-        'glow': '0 0 15px rgba(212, 175, 55, 0.3)',
-      }
+        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.35)',
+        'glow': '0 0 20px rgba(212, 175, 55, 0.5)',
+        'gold': '0 8px 35px -4px rgba(212,175,55,0.40)',
+        'gold-lg': '0 12px 50px -6px rgba(212,175,55,0.55)',
+        'colored': '0 8px 30px -4px rgba(99,102,241,0.30)',
+        'card': '0 4px 30px rgba(0,0,0,0.40)',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'shimmer': 'shimmer 2.5s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
     },
   },
   plugins: [

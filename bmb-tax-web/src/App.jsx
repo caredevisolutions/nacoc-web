@@ -33,7 +33,7 @@ function App() {
     <HelmetProvider>
         <Router>
             <ScrollToTop />
-            <div className="min-h-screen bg-black-rich text-neutral-300 font-sans selection:bg-gold-light selection:text-black-rich flex flex-col overflow-x-hidden">
+            <div className="min-h-screen font-sans flex flex-col overflow-x-hidden">
                 <Navbar />
                 <div className="flex-grow pt-0">
                     <Routes>
