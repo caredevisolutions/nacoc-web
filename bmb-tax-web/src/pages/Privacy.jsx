@@ -7,10 +7,10 @@ const Privacy = () => {
       <Helmet>
         <title>Privacy Policy | BMB Tax & Financial Service</title>
       </Helmet>
-      <div className="bg-black-rich min-h-screen pt-32 pb-24 text-slate-300">
+      <div className="bg-black-rich min-h-screen pt-32 pb-24 text-neutral-300">
         <div className="container mx-auto px-6 max-w-4xl">
             <h1 className="text-4xl font-heading font-bold mb-8 text-white">Privacy Policy</h1>
-            <div className="prose lg:prose-lg prose-headings:text-white prose-p:text-slate-300 prose-li:text-slate-300 prose-strong:text-gold-DEFAULT">
+            <div className="prose lg:prose-lg prose-headings:text-white prose-p:text-neutral-300 prose-li:text-neutral-300 prose-strong:text-gold-DEFAULT">
                 <p>Last Updated: {new Date().toLocaleDateString()}</p>
                 <p>We are committed to protecting your personal information and your right to privacy.</p>
                 

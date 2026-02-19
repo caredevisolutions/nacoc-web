@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calculator, FileText, Briefcase, TrendingUp } from 'lucide-react';
+import { Calculator, FileText, Briefcase, TrendingUp, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -7,35 +7,23 @@ const Services = () => {
     const services = [
       {
         icon: Calculator,
-        title: "Tax Preparation",
-        desc: "Comprehensive tax filing for individuals and businesses in Euless and beyond. Maximize deductions and minimize liability.",
-        color: "bg-gold-DEFAULT",
-        iconTv: "text-gold-DEFAULT",
-        iconBg: "bg-slate-800",
+        title: "Tax Planning & Prep",
+        desc: "Proactive strategies to minimize liability and ensure compliance for individuals and businesses.",
       },
       {
         icon: FileText,
-        title: "Bookkeeping",
-        desc: "Accurate monthly bookkeeping to keep your finances organized and ready for tax season. Let us handle the numbers.",
-        color: "bg-gold-DEFAULT",
-        iconTv: "text-gold-DEFAULT",
-        iconBg: "bg-slate-800",
+        title: "Bookkeeping & Payroll",
+        desc: "Precision in every transaction. We keep your books organized so you can focus on growth.",
       },
       {
         icon: Briefcase,
         title: "Business Consulting",
-        desc: "Strategic advice to start, grow, or restructure your business for optimal financial health and long-term success.",
-         color: "bg-gold-DEFAULT",
-         iconTv: "text-gold-DEFAULT",
-         iconBg: "bg-slate-800",
+        desc: "Strategic guidance for entity formation, restructuring, and operational efficiency.",
       },
       {
         icon: TrendingUp,
-        title: "Financial Planning",
-        desc: "Long-term strategies to build wealth and secure your future with personalized roadmaps tailored to your goals.",
-        color: "bg-gold-DEFAULT",
-        iconTv: "text-gold-DEFAULT",
-        iconBg: "bg-slate-800",
+        title: "Wealth Management",
+        desc: "Holistic financial planning to build, protect, and transfer your wealth effectively.",
       }
     ];
   
@@ -44,69 +32,81 @@ const Services = () => {
       show: {
         opacity: 1,
         transition: {
-          staggerChildren: 0.2
+          staggerChildren: 0.15
         }
       }
     };
   
     const item = {
-      hidden: { opacity: 0, y: 30 },
-      show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
+      hidden: { opacity: 0, y: 20 },
+      show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 40 } }
     };
   
   
     return (
-      <section id="services" className="py-24 bg-black-rich relative overflow-hidden">
-          {/* Subtle pattern background */}
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fbbf24 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold-DEFAULT/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-  
+      <section id="services" className="py-24 bg-[#1C1C1E] relative overflow-hidden">
+          {/* Background Effects */}
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+          <div className="absolute right-0 top-1/4 w-[30%] h-[30%] bg-gold-DEFAULT/5 blur-[120px] rounded-full pointer-events-none"></div>
+          
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-white">Our Expertise</h2>
-              <div className="w-24 h-1.5 bg-gold-DEFAULT mx-auto mb-6 rounded-full"></div>
-              <p className="text-slate-300 text-lg">
-                  We provide a full suite of financial services designed to help you navigate complex tax laws and achieve your financial goals.
-              </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+              <div className="max-w-2xl">
+                  <div className="flex items-center gap-2 mb-4">
+                      <div className="h-[1px] w-8 bg-gold-DEFAULT"></div>
+                      <span className="text-gold-light uppercase tracking-widest text-xs font-medium">What We Do</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-heading font-medium text-white leading-tight">
+                      Comprehensive <span className="text-gold-DEFAULT">Financial Solutions.</span>
+                  </h2>
+              </div>
+              <div className="max-w-md">
+                  <p className="text-[#A1A1AA] text-lg font-light leading-relaxed">
+                      We go beyond standard accounting to provide a full suite of services designed for your long-term success.
+                  </p>
+              </div>
           </div>
   
           <motion.div 
               variants={container}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
               {services.map((service, idx) => (
                   <motion.div 
                       variants={item}
                       key={idx} 
-                      whileHover={{ 
-                          y: -10,
-                          scale: 1.02,
-                      }}
-                      className="bg-slate-900/50 p-8 rounded-3xl shadow-lg transition-all duration-300 border border-slate-800 group relative overflow-hidden hover:border-gold-DEFAULT/50"
+                      className="group relative bg-[#2C2C2E] p-8 rounded-2xl border border-white/5 hover:border-gold-DEFAULT/30 transition-all duration-300 hover:shadow-2xl hover:shadow-gold-DEFAULT/5 overflow-hidden"
                   >
-                       {/* Gradient Hover Border */}
-                      <div className={`absolute bottom-0 left-0 w-full h-1 ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></div>
+                      {/* Hover Gradient Background */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gold-DEFAULT/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gold-DEFAULT/5 rounded-bl-full -mr-10 -mt-10 transition-colors group-hover:bg-gold-DEFAULT/10"></div>
-  
-                      <div className={`w-16 h-16 ${service.iconBg} rounded-2xl flex items-center justify-center ${service.iconTv} mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md relative z-10 border border-slate-700`}>
-                          <service.icon size={30} strokeWidth={1.5} />
+                      <div className="relative z-10">
+                          <div className="w-14 h-14 bg-[#1C1C1E] rounded-xl flex items-center justify-center text-gold-DEFAULT mb-6 border border-white/5 group-hover:border-gold-DEFAULT/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-black/20">
+                              <service.icon size={26} strokeWidth={1.5} />
+                          </div>
+                          
+                          <h3 className="text-xl font-heading font-medium mb-3 text-white group-hover:text-gold-light transition-colors">{service.title}</h3>
+                          
+                          <p className="text-[#A1A1AA] text-sm leading-relaxed mb-6 group-hover:text-[#D4D4D8] transition-colors">
+                              {service.desc}
+                          </p>
+                          
+                          <div className="flex items-center text-gold-DEFAULT text-xs font-medium uppercase tracking-wider opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                              <span>Learn More</span>
+                              <ArrowRight size={14} className="ml-2" />
+                          </div>
                       </div>
-                      
-                      <h3 className="text-xl font-bold mb-3 text-white group-hover:text-gold-DEFAULT transition-colors">{service.title}</h3>
-                      <p className="text-slate-400 leading-relaxed text-sm group-hover:text-slate-300 transition-colors">
-                          {service.desc}
-                      </p>
                   </motion.div>
               ))}
           </motion.div>
           
-          <div className="text-center">
-              <Link to="/services" className="inline-block px-8 py-3 rounded-full border border-gold-DEFAULT text-gold-DEFAULT font-bold hover:bg-gold-DEFAULT hover:text-black-rich transition-all duration-300 shadow-lg hover:shadow-gold-DEFAULT/20">
-                  View All Services
+          <div className="mt-16 text-center">
+              <Link to="/services" className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-gold-DEFAULT/30 text-gold-light font-medium text-sm tracking-wide hover:bg-gold-DEFAULT hover:text-black-rich transition-all duration-300 hover:shadow-lg hover:shadow-gold-DEFAULT/20">
+                  <span>View All Services</span>
+                  <ArrowRight size={16} />
               </Link>
           </div>
         </div>

@@ -1,100 +1,108 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Award, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Users, ArrowRight, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
-  return (
-    <section id="about" className="py-24 bg-black-rich overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-            
-            <motion.div 
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="order-2 md:order-1 relative"
-            >
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-gold-DEFAULT/20 rounded-full blur-3xl opacity-50"></div>
-                
-                <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-800">
-                    <img 
-                        src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
-                        alt="BMB Team Meeting" 
-                        className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 grayscale hover:grayscale-0"
-                    />
-                     <div className="absolute inset-0 bg-black-rich/20 hover:bg-transparent transition-colors duration-300"></div>
+    return (
+        <section id="about" className="py-24 bg-[#1C1C1E] relative overflow-hidden">
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    
+                    {/* Image Section */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="relative order-2 lg:order-1"
+                    >
+                        {/* Decorative background blob */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold-DEFAULT/5 blur-[100px] rounded-full -z-10"></div>
+                        
+                        <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                             <img 
+                                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
+                                alt="BMB Team Meeting" 
+                                className="w-full h-auto object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+                            />
+                             {/* Overlay gradient */}
+                             <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1E]/80 to-transparent"></div>
+                             
+                             {/* Floating Badge */}
+                             <motion.div 
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                                className="absolute bottom-6 left-6 right-6 bg-[#2C2C2E]/90 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg flex items-start gap-4"
+                            >
+                                <div className="p-3 bg-gold-DEFAULT/10 rounded-lg text-gold-DEFAULT">
+                                    <Award size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="text-white font-medium mb-1">Award Winning Service</h4>
+                                    <p className="text-[#A1A1AA] text-xs leading-relaxed">Recognized for excellence in tax strategy and client satisfaction.</p>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+
+                    {/* Content Section */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="order-1 lg:order-2"
+                    >
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="h-[1px] w-12 bg-gold-DEFAULT"></div>
+                            <span className="text-gold-light uppercase tracking-widest text-xs font-medium">Who We Are</span>
+                        </div>
+                        
+                        <h2 className="text-4xl md:text-5xl font-heading font-medium mb-6 text-white leading-tight">
+                            Strategic Partners in <br/>
+                            <span className="text-gold-DEFAULT">Your Success.</span>
+                        </h2>
+                        
+                        <p className="text-[#A1A1AA] text-lg leading-relaxed mb-8 font-light">
+                            Based in Euless, Texas, <strong>BMB Tax and Financial Service</strong> isn't just about filing returns. We are architects of financial stability, helping you navigate complex regulations with clarity and confidence.
+                        </p>
+
+                        <div className="space-y-6 mb-10">
+                            {[
+                                { 
+                                    icon: ShieldCheck, 
+                                    title: "Uncompromising Integrity", 
+                                    desc: "We operate with full transparency. Your trust is our most valuable asset." 
+                                },
+                                { 
+                                    icon: Users, 
+                                    title: "Personalized Strategies", 
+                                    desc: "No two financial situations are alike. We tailor every solution to your specific goals." 
+                                }
+                            ].map((item, i) => (
+                                <div key={i} className="flex gap-4 group">
+                                    <div className="w-12 h-12 bg-[#2C2C2E] rounded-full flex items-center justify-center text-gold-DEFAULT shrink-0 border border-white/5 group-hover:border-gold-DEFAULT/30 group-hover:text-gold-light transition-all duration-300">
+                                        <item.icon size={20} />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-medium text-lg text-white mb-1 group-hover:text-gold-DEFAULT transition-colors">{item.title}</h4>
+                                        <p className="text-[#71717A] text-sm leading-relaxed">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <Link to="/about" className="group inline-flex items-center gap-2 text-gold-DEFAULT font-medium text-sm tracking-wide hover:text-gold-light transition-colors">
+                            <span className="border-b border-gold-DEFAULT/30 pb-0.5 group-hover:border-gold-light">Meet Our Team</span>
+                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </motion.div>
                 </div>
-
-                 <motion.div 
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5, type: 'spring' }}
-                    className="absolute -bottom-6 -right-6 z-20 bg-slate-900 p-6 rounded-2xl shadow-xl max-w-xs border border-slate-800"
-                >
-                    <div className="flex items-center gap-3 mb-2">
-                        <div className="text-gold-DEFAULT"><Award size={32} /></div>
-                        <div className="font-bold text-white leading-tight">Certified Excellence</div>
-                    </div>
-                    <p className="text-xs text-slate-400">Recognized for outstanding client service and 5.0-star rated reliability.</p>
-                </motion.div>
-            </motion.div>
-
-            <motion.div 
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-1 md:order-2"
-            >
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="h-px w-8 bg-gold-DEFAULT"></div>
-                    <span className="text-gold-DEFAULT font-bold uppercase tracking-wider text-sm">About Us</span>
-                </div>
-                
-                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-white leading-tight">
-                    Your Strategic Financial <br className="hidden md:block"/>
-                    <span className="relative inline-block pb-2">
-                        <span className="text-gold-DEFAULT">Partners.</span>
-                    </span>
-                </h2>
-                
-                <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                    Based in Euless, Texas, <strong>BMB Tax and Financial Service</strong> is dedicated to providing professional, accurate, and timely financial services. Founded on the principles of integrity and transparency, we help individuals and businesses navigate the complexities of the financial world with confidence.
-                </p>
-
-                <div className="space-y-6 mb-8">
-                    <div className="group flex gap-4 p-4 rounded-xl hover:bg-slate-800/50 transition-colors duration-300">
-                        <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-gold-DEFAULT shrink-0 group-hover:bg-gold-DEFAULT group-hover:text-black-rich transition-colors duration-300">
-                            <ShieldCheck size={24} />
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-lg text-white">Reliable & Secure</h4>
-                            <p className="text-slate-400">Your data security is our top priority. We use bank-grade encryption to protect your sensitive information.</p>
-                        </div>
-                    </div>
-
-                    <div className="group flex gap-4 p-4 rounded-xl hover:bg-slate-800/50 transition-colors duration-300">
-                        <div className="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-gold-DEFAULT shrink-0 group-hover:bg-gold-DEFAULT group-hover:text-black-rich transition-colors duration-300">
-                            <Users size={24} />
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-lg text-white">Client-Centric Approach</h4>
-                            <p className="text-slate-400">No cookie-cutter solutions. Every strategy is tailored to your unique financial goals and circumstances.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <Link to="/about" className="inline-flex items-center gap-2 text-gold-DEFAULT font-bold hover:text-white transition-colors group">
-                    Get to know our team <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-            </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 };
 
 export default About;

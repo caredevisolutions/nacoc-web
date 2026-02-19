@@ -12,21 +12,21 @@ export default {
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
-          500: '#0ea5e9', // Professional Blue
+          500: '#0ea5e9',
           600: '#0284c7',
           700: '#0369a1',
           900: '#0c4a6e',
         },
         gold: {
-          DEFAULT: '#C6A45C', // Elegant Warm Gold from reference
-          light: '#DEBC72',   // Lighter Gold accent
-          dark: '#9A7E3E',    // Darker Gold for depth
-          muted: '#5C4D2B',   // Muted gold for backgrounds
+          DEFAULT: '#D4AF37', // Genuine Metallic Gold
+          light: '#F2D680',   // Champagne Gold
+          dark: '#AA882C',    // Antique Gold
+          muted: '#8A7638',   // Bronze-ish for subdued text
         },
         black: {
-          rich: '#0F0E0A', // Warm Black/Brown from reference
-          card: '#16140E', // Slightly lighter for cards
-          light: '#26241C', // Soft Black for borders etc
+          rich: '#1C1C1E', // Apple Dark Gray - Softer than pure black
+          card: '#2C2C2E', // Slightly lighter card background
+          light: '#3A3A3C', // Even lighter for borders/hovers
         }
       },
       fontFamily: {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,90 +17,108 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Services', path: '/services' },
-        { name: 'About', path: '/about' },
-        { name: 'Testimonials', path: '/testimonials' },
+        { name: 'Home', path: '#home' },
+        { name: 'Services', path: '#services' },
+        { name: 'About', path: '#about' },
+        { name: 'Testimonials', path: '#testimonials' },
     ];
 
     return (
         <nav 
-            className={`fixed w-full z-50 transition-all duration-300 border-b ${
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
                 scrolled 
-                ? 'bg-black-rich/95 backdrop-blur-md py-4 border-white/5 shadow-2xl' 
-                : 'bg-black-rich/50 backdrop-blur-sm py-6 border-transparent'
+                ? 'bg-[#1C1C1E]/90 backdrop-blur-xl py-4 border-white/5 shadow-2xl shadow-black/50' 
+                : 'bg-transparent py-6 border-transparent'
             }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
-                
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2 group">
-                    <div className="font-heading font-bold text-2xl md:text-3xl text-white tracking-wide">
-                        BMB <span className="text-gold-DEFAULT group-hover:text-gold-light transition-colors">Tax</span>
-                    </div>
+                <Link to="/" className="flex items-center gap-2 group relative z-50">
+                     <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-gold-DEFAULT rounded-lg flex items-center justify-center text-black-rich font-bold text-lg">B</div>
+                        <div className="font-heading font-medium text-xl md:text-2xl text-white tracking-tight">
+                            BMB <span className="text-gold-DEFAULT">Tax</span>
+                        </div>
+                     </div>
                 </Link>
                 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
-                    {navLinks.map((item) => (
-                        <div key={item.name} className="relative group">
-                            <Link 
-                                to={item.path}
-                                className={`text-sm font-medium tracking-widest uppercase transition-colors duration-300 ${
-                                    location.pathname === item.path 
-                                    ? 'text-gold-DEFAULT' 
-                                    : 'text-slate-300 hover:text-white'
+                    <div className="flex bg-[#2C2C2E]/50 backdrop-blur-md rounded-full px-6 py-2 border border-white/5">
+                        {navLinks.map((item) => (
+                            <a 
+                                key={item.name}
+                                href={item.path}
+                                className={`relative px-4 py-1 text-xs font-medium uppercase tracking-wider transition-colors duration-300 ${
+                                    location.hash === item.path 
+                                    ? 'text-white' 
+                                    : 'text-[#A1A1AA] hover:text-white'
                                 }`}
                             >
                                 {item.name}
-                            </Link>
-                            <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-0.5 bg-gold-DEFAULT transition-all duration-300 ${
-                                location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
-                            }`}></span>
-                        </div>
-                    ))}
-                    
-                    <Link 
+                                {location.hash === item.path && (
+                                    <motion.span 
+                                        layoutId="nav-pill"
+                                        className="absolute inset-0 bg-white/10 rounded-full -z-10"
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    ></motion.span>
+                                )}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="hidden md:block">
+                     <Link 
                         to="/contact" 
-                        className="bg-transparent border border-gold-DEFAULT text-gold-DEFAULT px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-gold-DEFAULT hover:text-black-rich transition-all duration-500 shadow-[0_0_15px_-3px_rgba(198,164,92,0.3)] hover:shadow-[0_0_25px_-3px_rgba(198,164,92,0.6)]"
+                        className="group flex items-center gap-2 bg-white text-black-rich px-5 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider hover:bg-gold-DEFAULT hover:text-black-rich transition-all duration-300 shadow-lg shadow-white/5 hover:shadow-gold-DEFAULT/20"
                     >
-                        Free Consultation
+                        <span>Free Consultation</span>
+                        <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                 </div>
 
                 {/* Mobile Toggle */}
                 <button 
-                    className="md:hidden text-white hover:text-gold-DEFAULT transition-colors p-2" 
+                    className="md:hidden text-white hover:text-gold-DEFAULT transition-colors p-2 relative z-50 backdrop-blur-sm bg-white/5 rounded-full"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 z-40 bg-black-rich/95 backdrop-blur-xl transition-all duration-500 md:hidden flex justify-center items-center ${
-                isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-            }`}>
-                 <div className="flex flex-col items-center gap-8">
-                    {navLinks.map((item) => (
-                        <Link 
-                            key={item.name} 
-                            to={item.path}
-                            className="text-2xl font-heading text-white hover:text-gold-DEFAULT transition-colors"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                    <Link 
-                        to="/contact"
-                        className="mt-4 bg-gold-DEFAULT text-black-rich px-8 py-3 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-white transition-all shadow-lg shadow-gold-DEFAULT/20"
-                        onClick={() => setIsOpen(false)}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 z-40 bg-[#1C1C1E] flex flex-col pt-32 px-6 md:hidden"
                     >
-                        Free Consultation
-                    </Link>
-                </div>
-            </div>
+                         <div className="flex flex-col gap-6">
+                            {navLinks.map((item) => (
+                                <a 
+                                    key={item.name} 
+                                    href={item.path}
+                                    className="text-3xl font-heading font-medium text-white hover:text-gold-DEFAULT transition-colors flex items-center justify-between group border-b border-white/5 pb-4"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {item.name}
+                                    <ArrowUpRight size={20} className="opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0" />
+                                </a>
+                            ))}
+                            <Link 
+                                to="/contact"
+                                className="mt-8 w-full bg-gold-DEFAULT text-black-rich px-8 py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-white transition-all text-center"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Free Consultation
+                            </Link>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };
