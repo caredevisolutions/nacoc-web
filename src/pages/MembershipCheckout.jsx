@@ -4,8 +4,8 @@ import { Check, User, Mail, Phone, MapPin, CreditCard, Loader2, Briefcase, Users
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-// Replace with your actual Stripe publishable key
-const stripePromise = loadStripe('pk_test_sample_key_replace_me');
+// Replace with your actual Stripe publishable key via Environment Variable
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const CATEGORIES = [
   "Technology & Software", "Healthcare & Wellness", "Real Estate & Construction",
@@ -32,6 +32,12 @@ const CATEGORY_SUBCATEGORIES = {
 
 const SOCIAL_PLATFORMS = ["LinkedIn", "Facebook", "Instagram", "Twitter / X", "YouTube", "TikTok", "Pinterest", "Other"];
 
+const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+    return Math.round(num * 100); // cents
+};
+
 const CheckoutContent = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -41,17 +47,32 @@ const CheckoutContent = () => {
     // Get plan from navigation state or fallback
     const plan = location.state?.plan;
 
-    // Redirect if no plan selected
-    useEffect(() => {
-        if (!plan) {
-            navigate('/membership');
-        }
-    }, [plan, navigate]);
-
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(null);
     const [fieldErrors, setFieldErrors] = useState({});
+    const [clientSecret, setClientSecret] = useState('');
+    
+    // Use environment variable for API URL in production
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+
+    // Redirect if no plan selected
+    useEffect(() => {
+        if (!plan) {
+            navigate('/membership');
+        } else {
+            // Create PaymentIntent as soon as the page loads
+            const amount = parsePrice(plan.price);
+            fetch(`${API_URL}/create-payment-intent`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount, currency: 'usd' }),
+            })
+                .then((res) => res.json())
+                .then((data) => setClientSecret(data.clientSecret))
+                .catch((err) => console.error('Error fetching client secret:', err));
+        }
+    }, [plan, navigate]);
     
     const [formData, setFormData] = useState({
         fullName: '',
@@ -139,44 +160,67 @@ const CheckoutContent = () => {
             return;
         }
 
-        setLoading(true);
-        setError(null);
-
-        if (!stripe || !elements) {
-            setLoading(false);
+        if (!stripe || !elements || !clientSecret) {
+            setError("Payment system initializing... Please wait.");
             return;
         }
 
+        setLoading(true);
+        setError(null);
+
         const cardElement = elements.getElement(CardElement);
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-            billing_details: {
-                name: formData.fullName,
-                email: formData.email,
-                phone: formData.phone,
-                address: {
-                    line1: formData.businessAddress,
-                    city: formData.city,
-                    state: formData.state,
-                    postal_code: formData.zip,
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: cardElement,
+                billing_details: {
+                    name: formData.fullName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    address: {
+                        line1: formData.businessAddress,
+                        city: formData.city,
+                        state: formData.state,
+                        postal_code: formData.zip,
+                    },
                 },
             },
         });
 
-        if (error) {
-            setError(error.message);
+        if (result.error) {
+            setError(result.error.message);
             setLoading(false);
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
-            console.log('[RegistrationData]', formData); 
-            
-            setTimeout(() => {
-                setSuccess(true);
-                setLoading(false);
-            }, 1500);
+             if (result.paymentIntent.status === 'succeeded') {
+                // Save membership data to backend
+                try {
+                    await fetch(`${API_URL}/confirm-membership`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            paymentIntentId: result.paymentIntent.id,
+                            registrationData: stripFiles(formData) // Helper to remove file objects before sending JSON
+                        })
+                    });
+                } catch (err) {
+                    console.error('Error saving membership:', err);
+                    // Continue to success screen as payment was successful
+                }
+                
+                setTimeout(() => {
+                    setSuccess(true);
+                    setLoading(false);
+                }, 1500);
+             }
         }
+    };
+
+    // Helper to strip File objects as they can't be JSON stringified directly
+    const stripFiles = (data) => {
+        const { logo, ...rest } = data;
+        // If logo needs to be uploaded, it should happen via S3 signed URL separately. 
+        // For now, we skip sending the File object to the JSON API.
+        return rest;
     };
 
     if (success) {

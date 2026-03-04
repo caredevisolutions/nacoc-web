@@ -4,6 +4,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./nacoc-theme/**/*.{php,html,js}",
   ],
   theme: {
     extend: {

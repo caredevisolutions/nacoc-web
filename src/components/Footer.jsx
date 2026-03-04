@@ -57,8 +57,6 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li><Link to="/events" className="text-slate-300 hover:text-white hover:translate-x-1 inline-flex items-center transition-all w-full"><ArrowRight size={12} className="mr-2 opacity-0 -ml-4 hover:ml-0 hover:opacity-100 transition-all text-secondary" /> News & Events</Link></li>
               <li><Link to="/resources" className="text-slate-300 hover:text-white hover:translate-x-1 inline-flex items-center transition-all w-full"><ArrowRight size={12} className="mr-2 opacity-0 -ml-4 hover:ml-0 hover:opacity-100 transition-all text-secondary" /> Community Resources</Link></li>
-              <li><Link to="/gallery" className="text-slate-300 hover:text-white hover:translate-x-1 inline-flex items-center transition-all w-full"><ArrowRight size={12} className="mr-2 opacity-0 -ml-4 hover:ml-0 hover:opacity-100 transition-all text-secondary" /> Photo Gallery</Link></li>
-              <li><Link to="/login" className="text-secondary font-bold hover:text-white hover:translate-x-1 inline-flex items-center transition-all w-full"><ArrowRight size={12} className="mr-2 text-white" /> Member Login</Link></li>
             </ul>
           </div>
 

@@ -86,9 +86,12 @@ const Navbar = () => {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center">
             {/* Logo Section */}
-            <Link to="/" className="flex items-center group gap-2 flex-shrink-0 relative">
+            <Link to="/" className="flex items-center group gap-3 flex-shrink-0 relative">
                <div className="p-1 rounded-md transition-transform duration-300 group-hover:scale-105">
                   <img src="/assets/logo.png" alt="NACOC Logo" className="h-10 lg:h-12 w-auto" />
+               </div>
+               <div className="font-heading font-bold text-slate-800 text-xs sm:text-sm lg:text-base leading-tight max-w-[160px] sm:max-w-[200px]">
+                  Nepalese American Chamber of Commerce
                </div>
             </Link>
 
@@ -172,16 +175,6 @@ const Navbar = () => {
                 >
                   Join NACOC
               </Link>
-              
-              {/* <Link 
-                to="/login"
-                className="group relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white transition-all duration-300 bg-gradient-to-r from-primary to-primary-light rounded-full hover:shadow-lg hover:shadow-primary/30 text-sm whitespace-nowrap"
-              >
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
-                <span className="relative flex items-center gap-2">
-                   Member Portal <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link> */}
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -263,13 +256,6 @@ const Navbar = () => {
                 >
                  Join NACOC
                 </Link>
-               {/* <Link
-                  to="/login"
-                  className="w-full py-4 text-center rounded-xl bg-gradient-to-r from-primary to-primary-light text-white font-bold shadow-lg shadow-primary/20 block"
-                  onClick={() => setIsOpen(false)}
-                >
-                 Member Portal
-                </Link> */}
              </div>
           </motion.div>
         )}

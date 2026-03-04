@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "theme:build": "tailwindcss -i ./nacoc-theme/assets/css/src/style.css -o ./nacoc-theme/assets/css/main.css",
+    "theme:watch": "tailwindcss -i ./nacoc-theme/assets/css/src/style.css -o ./nacoc-theme/assets/css/main.css --watch",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

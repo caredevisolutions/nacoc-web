@@ -3,6 +3,43 @@ import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
+  const [formData, setFormData] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [status, setStatus] = React.useState('idle'); // idle, submitting, success, error
+
+  // Use environment variable for API URL
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    try {
+      const response = await fetch(`${API_URL}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) throw new Error('Failed to send message');
+      
+      setStatus('success');
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen pt-20">
       
@@ -94,37 +131,91 @@ const Contact = () => {
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Send us a Message</h3>
                 <p className="text-slate-500 mb-10">Fill out the form below and our team will get back to you within 24 hours.</p>
                 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">First Name</label>
-                            <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="John" />
+                            <input 
+                                type="text" 
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
+                                placeholder="John" 
+                            />
                         </div>
                         <div>
                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Last Name</label>
-                            <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="Doe" />
+                            <input 
+                                type="text" 
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
+                                placeholder="Doe" 
+                            />
                         </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Address</label>
-                            <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="john@example.com" />
+                            <input 
+                                type="email" 
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
+                                placeholder="john@example.com" 
+                            />
                         </div>
                         <div>
                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Phone (Optional)</label>
-                            <input type="tel" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="+1 (555) 000-0000" />
+                            <input 
+                                type="tel" 
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
+                                placeholder="+1 (555) 000-0000" 
+                            />
                         </div>
                     </div>
 
                     <div>
                         <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Message</label>
-                        <textarea rows="5" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="How can we help you?"></textarea>
+                        <textarea 
+                            rows="5" 
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
+                            placeholder="How can we help you?"
+                        ></textarea>
                     </div>
 
-                    <button type="submit" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/30 w-full sm:w-auto hover:-translate-y-1">
-                        Send Message <Send size={18} className="ml-2" />
+                    <button 
+                        type="submit" 
+                        disabled={status === 'submitting'}
+                        className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/30 w-full sm:w-auto hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {status === 'submitting' ? 'Sending...' : 'Send Message'} <Send size={18} className="ml-2" />
                     </button>
+                    
+                    {status === 'success' && (
+                        <div className="p-4 bg-green-50 text-green-700 rounded-xl border border-green-100 flex items-center">
+                            <Clock className="mr-2" size={18} /> Message sent successfully! We'll get back to you shortly.
+                        </div>
+                    )}
+                    {status === 'error' && (
+                        <div className="p-4 bg-red-50 text-red-700 rounded-xl border border-red-100">
+                            Failed to send message. Please try again later.
+                        </div>
+                    )}
                 </form>
             </div>
         </div>

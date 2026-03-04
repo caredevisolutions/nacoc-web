@@ -10,7 +10,6 @@ import Programs from './pages/Programs';
 import Membership from './pages/Membership';
 import MembershipCheckout from './pages/MembershipCheckout';
 import Contact from './pages/Contact';
-import Login from './pages/Login';
 import BusinessDirectory from './pages/BusinessDirectory';
 import BusinessDetails from './pages/BusinessDetails';
 import Resources from './pages/Resources';
@@ -18,20 +17,7 @@ import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 import Blogs from './pages/Blogs';
 import BlogDetails from './pages/BlogDetails';
-import Gallery from './pages/Gallery';
 // import EConsultReview from './gazuntite/EConsultReview';
-
-// Admin
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminLogin from './pages/admin/AdminLogin';
-import Members from './pages/admin/Members';
-import MemberDetailsAdmin from './pages/admin/MemberDetails';
-import AdminEvents from './pages/admin/Events';
-import Directory from './pages/admin/Directory';
-import Settings from './pages/admin/Settings';
-import Revenue from './pages/admin/Revenue';
-import Engagement from './pages/admin/Engagement';
 
 import { AuthProvider } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
@@ -65,29 +51,6 @@ function App() {
         <Router>
           <ScrollToTop />
           <Routes>
-            {/* Admin Login - Outside Layout */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-
-          {/* Gazuntite Demo Route - Standalone */}
-          {/* <Route path="/econsult" element={<EConsultReview />} /> */}
-
-          {/* Admin Protected Routes */}
-          <Route path="/admin/*" element={
-              <AdminLayout>
-                  <Routes>
-                      <Route index element={<AdminDashboard />} />
-                      <Route path="dashboard" element={<AdminDashboard />} />
-                      <Route path="members" element={<Members />} />
-                      <Route path="members/:id" element={<MemberDetailsAdmin />} />
-                      <Route path="events" element={<AdminEvents />} />
-                      <Route path="directory" element={<Directory />} />
-                      <Route path="revenue" element={<Revenue />} />
-                      <Route path="engagement" element={<Engagement />} />
-                      <Route path="settings" element={<Settings />} />
-                  </Routes>
-              </AdminLayout>
-          } />
-
           {/* Public Routes */}
           <Route path="*" element={
               <MainLayout>
@@ -98,7 +61,6 @@ function App() {
                       <Route path="/membership" element={<Membership />} />
                       <Route path="/membership/checkout" element={<MembershipCheckout />} />
                       <Route path="/contact-us" element={<Contact />} />
-                      <Route path="/login" element={<Login />} />
                       <Route path="/directory" element={<BusinessDirectory />} />
                       <Route path="/directory/:slug" element={<BusinessDetails />} />
                       <Route path="/resources" element={<Resources />} />
@@ -106,7 +68,6 @@ function App() {
                       <Route path="/events/:slug" element={<EventDetails />} />
                       <Route path="/blogs" element={<Blogs />} />
                       <Route path="/blogs/:slug" element={<BlogDetails />} />
-                      <Route path="/gallery" element={<Gallery />} />
                       <Route path="*" element={<div className="p-20 text-center">Page not found</div>} />
                   </Routes>
               </MainLayout>
