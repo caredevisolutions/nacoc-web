@@ -99,12 +99,12 @@ const About = () => {
   ];
 
   const guidelines = [
-    { title: "Lifelong Learning", desc: "Promote continuous education to stay ahead in a changing market.", bg: "bg-blue-600" },
-    { title: "Economic Prosperity", desc: "Encourage business and community wealth through strategic programs.", bg: "bg-amber-500" },
-    { title: "Overcoming Obstacles", desc: "Identify and remove barriers detrimental to the business climate.", bg: "bg-red-500" },
-    { title: "Unified Voice", desc: "Serve as a non-partisan advocate for the DFW Nepali business community.", bg: "bg-emerald-500" },
-    { title: "Civic Engagement", desc: "Support programs that increase the community's functional and aesthetic value.", bg: "bg-purple-600" },
-    { title: "Key Leadership", desc: "Provide direction on economic growth, education, quality of life, and diversity.", bg: "bg-indigo-600" }
+    { title: "Lifelong Learning", desc: "Promote continuous education to stay ahead in a changing market.", bg: "bg-slate-50" },
+    { title: "Economic Prosperity", desc: "Encourage business and community wealth through strategic programs.", bg: "bg-slate-50" },
+    { title: "Overcoming Obstacles", desc: "Identify and remove barriers detrimental to the business climate.", bg: "bg-slate-50" },
+    { title: "Unified Voice", desc: "Serve as a non-partisan advocate for the DFW Nepali business community.", bg: "bg-slate-50" },
+    { title: "Civic Engagement", desc: "Support programs that increase the community's functional and aesthetic value.", bg: "bg-slate-50" },
+    { title: "Key Leadership", desc: "Provide direction on economic growth, education, quality of life, and diversity.", bg: "bg-slate-50" }
   ];
 
   const renderMemberCard = (leader, index) => (
@@ -203,15 +203,15 @@ const About = () => {
                  whileInView={{ opacity: 1, y: 0 }}
                  viewport={{ once: true }}
                  transition={{ delay: index * 0.1 }}
-                 className={`${item.bg} p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 shadow-lg group text-white relative overflow-hidden flex flex-col gap-6 min-h-[320px]`}
+                 className={`${item.bg} p-8 rounded-2xl border border-slate-200 hover:-translate-y-1 transition-transform duration-300 shadow-sm group text-slate-800 relative overflow-hidden flex flex-col gap-6 min-h-[240px] hover:shadow-md`}
                >
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full -mr-8 -mt-8"></div>
-                 <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shrink-0 relative z-10">
-                    <CheckCircle size={24} className="text-white" />
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-slate-200/50 rounded-bl-full -mr-8 -mt-8"></div>
+                 <div className="w-12 h-12 bg-white border border-slate-200 rounded-xl flex items-center justify-center shrink-0 relative z-10 shadow-sm">
+                    <CheckCircle size={24} className="text-primary" />
                  </div>
                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-white/90 leading-relaxed text-base font-medium opacity-90">
+                    <h3 className="text-xl font-bold mb-2 text-slate-900">{item.title}</h3>
+                    <p className="text-slate-600 leading-relaxed text-sm font-medium">
                     {item.desc}
                     </p>
                  </div>

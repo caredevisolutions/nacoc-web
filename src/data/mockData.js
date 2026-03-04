@@ -243,6 +243,22 @@ export const MOCK_BUSINESSES = [
         },
         services: ["Auto Insurance", "Home Insurance", "Life Insurance", "Business Insurance"],
         image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+        id: 7,
+        name: "BMB Tax and Financial Service", 
+        category: "Financial Services", 
+        address: "TODO: Add Address", 
+        phone: "TODO: Add Phone", 
+        website: "TODO: Add Website", 
+        featured: false,
+        description: "TODO: Add Description related to tax and financial services.",
+        hours: "TODO: Add Hours",
+        social: {
+            linkedin: "#"
+        },
+        services: ["Tax Preparation", "Financial Planning"],
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
     }
 ];
 

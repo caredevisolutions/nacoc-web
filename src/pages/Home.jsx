@@ -24,11 +24,16 @@ const Home = () => {
     <div className="overflow-x-hidden">
       
       {/* Centered Hero Section */}
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center bg-white overflow-hidden text-center pt-20 pb-10">
-        {/* Background Elements */}
-        <div className="absolute top-0 inset-x-0 h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50/50 via-white to-white z-0"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] animate-pulse delay-700"></div>
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center bg-slate-900 overflow-hidden text-center pt-20 pb-10">
+        {/* Background Elements - Signature Event Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+            alt="Signature Event Background" 
+            className="w-full h-full object-cover opacity-40 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/60"></div>
+        </div>
         
         {/* Decorative Grid */}
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 z-0 mix-blend-soft-light"></div>
@@ -39,9 +44,9 @@ const Home = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-3 px-4 py-1.5 bg-white border border-slate-200 rounded-full shadow-sm text-xs font-bold uppercase tracking-widest mb-8 text-primary"
+                className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full shadow-sm text-xs font-bold uppercase tracking-widest mb-8 text-white"
             >
-                <div className="flex items-center gap-2 border-r border-slate-200 pr-3">
+                <div className="flex items-center gap-2 border-r border-white/20 pr-3">
                    <img src="https://flagcdn.com/h24/us.png" alt="USA" className="h-3 w-auto object-contain rounded-[1px] shadow-sm" />
                    <img src="https://flagcdn.com/h24/np.png" alt="Nepal" className="h-4 w-auto object-contain drop-shadow-sm" />
                 </div>
@@ -52,43 +57,40 @@ const Home = () => {
                 initial="initial"
                 animate="animate"
                 variants={stagger}
-                className="text-5xl lg:text-7xl font-heading font-bold text-slate-900 leading-[1.1] mb-8 max-w-5xl mx-auto"
+                className="text-5xl lg:text-7xl font-heading font-bold text-white leading-[1.1] mb-8 max-w-5xl mx-auto flex flex-col items-center"
             >
-                <motion.span variants={fadeInUp} className="block">Uniting Businesses.</motion.span>
-                <motion.span variants={fadeInUp} className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-secondary pb-2">Empowering Community.</motion.span>
+                <div className="flex items-center gap-4 flex-wrap justify-center">
+                    <motion.span variants={fadeInUp} className="block">Uniting Businesses.</motion.span>
+                    {/* Placeholder for NACOC POP-UP or Image provided by Shraddha */}
+                </div>
+                <motion.span variants={fadeInUp} className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-light via-white to-secondary pb-2">Empowering Community.</motion.span>
             </motion.h1>
 
-            <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-lg lg:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed"
-            >
-                The Nepalese American Chamber of Commerce (NACOC) is the premier organization dedicated to fostering economic growth and professional development for Nepalese businesses in the USA.
-            </motion.p>
+            {/* Shifted "Driving Economic Growth" text down - Removed from here */}
 
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="flex flex-col sm:flex-row justify-center gap-4 relative z-20 mb-20"
+                className="flex flex-col sm:flex-row justify-center gap-4 relative z-20 mb-20 mt-8"
             >
               <Link to="/membership" className="px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-primary-dark transition-all duration-300 shadow-xl shadow-primary/30 flex items-center justify-center hover:-translate-y-1 text-base group">
                 Show your Support <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/about-us" className="px-8 py-4 bg-white text-slate-800 border border-slate-200 rounded-full font-bold hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 flex items-center justify-center shadow-lg hover:-translate-y-1 text-base">
+              <Link to="/about-us" className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold hover:bg-white/20 transition-all duration-300 flex items-center justify-center shadow-lg hover:-translate-y-1 text-base">
                 Our Mission
               </Link>
             </motion.div>
 
-            {/* Feature Cards - Colorful Design like Screenshot */}
+
+            {/* Feature Cards - Minimal Design */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto text-left">
                 {[
                   { 
                     icon: <Users className="w-8 h-8" />, 
                     title: "Networking", 
                     desc: "Connect with industry leaders and professionals.",
-                    bgClass: "bg-[#1e293b]", // Dark Blue Slate
+                    bgClass: "bg-white/5 backdrop-blur-sm", // Slate
                     iconColor: "text-white",
                     watermarkIcon: <Users strokeWidth={1} />,
                     link: "/about-us"
@@ -97,7 +99,7 @@ const Home = () => {
                     icon: <TrendingUp className="w-8 h-8" />, 
                     title: "Growth", 
                     desc: "Tools and mentorship to scale your business.",
-                    bgClass: "bg-[#b45309]", // Amber/Gold Dark
+                    bgClass: "bg-white/5 backdrop-blur-sm", // Slate
                     iconColor: "text-white",
                     watermarkIcon: <TrendingUp strokeWidth={1} />,
                     link: "/resources"
@@ -106,7 +108,7 @@ const Home = () => {
                     icon: <Calendar className="w-8 h-8" />, 
                     title: "Events", 
                     desc: "High-impact events designed for collaboration.",
-                    bgClass: "bg-[#dc2626]", // Red
+                    bgClass: "bg-white/5 backdrop-blur-sm", // Slate
                     iconColor: "text-white",
                     watermarkIcon: <Calendar strokeWidth={1} />,
                     link: "/events"
@@ -119,10 +121,10 @@ const Home = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2, duration: 0.8 }}
                     whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                    className={`${item.bgClass} rounded-3xl p-8 shadow-xl relative overflow-hidden group cursor-pointer h-full flex flex-col justify-between`}
+                    className={`${item.bgClass} rounded-3xl p-8 shadow-lg relative overflow-hidden group cursor-pointer h-full flex flex-col justify-between border border-white/10 hover:border-white/20 transition-colors`}
                   > 
                     {/* Watermark Icon */}
-                    <div className="absolute -bottom-8 -right-8 text-white opacity-10 w-48 h-48 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
+                    <div className="absolute -bottom-8 -right-8 text-white opacity-5 w-48 h-48 transform rotate-12 group-hover:scale-110 transition-transform duration-500">
                         {React.cloneElement(item.watermarkIcon, { size: 180 })}
                     </div>
 
@@ -134,7 +136,7 @@ const Home = () => {
                     
                     <div className="relative z-10 mt-auto">
                         <h3 className="text-2xl font-bold font-heading mb-2 text-white">{item.title}</h3>
-                        <p className="text-white/80 leading-relaxed font-body text-sm font-medium">
+                        <p className="text-slate-300 leading-relaxed font-body text-sm font-medium">
                         {item.desc}
                         </p>
                     </div>
@@ -145,13 +147,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section with decorative background */}
-      <div className="bg-slate-50 border-y border-slate-200 py-10 relative z-10 overflow-hidden">
-         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-         <div className="container mx-auto px-4 relative z-10">
-            <StatsSection />
+            {/* Vision Mission Goal Section & Intro */}
+      <section className="py-20 bg-slate-50 relative">
+         <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center mb-16">
+                 <span className="text-secondary font-bold uppercase tracking-widest text-xs mb-3 block">Who We Are</span>
+                 <h2 className="text-3xl lg:text-5xl font-heading font-bold text-slate-900 mb-6">Driving Economic Growth</h2>
+                 <p className="text-lg lg:text-xl text-slate-600 leading-relaxed">
+                    The Nepalese American Chamber of Commerce (NACOC) is the premier organization dedicated to fostering economic growth and professional development for Nepalese businesses in the USA.
+                 </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+               <div className="md:col-span-1 p-8 rounded-3xl bg-white border border-slate-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group h-full">
+                   <div className="w-16 h-16 mx-auto bg-slate-100 text-primary rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                      <Award size={32} />
+                   </div>
+                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Vision</h3>
+                   <p className="text-slate-600">To be the leading catalyst for the economic success and professional growth of the Nepalese-American community.</p>
+               </div>
+               <div className="md:col-span-1 p-8 rounded-3xl bg-white border border-slate-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden h-full">
+                   <div className="relative z-10">
+                       <div className="w-16 h-16 mx-auto bg-slate-100 text-slate-900 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                          <Shield size={32} />
+                       </div>
+                       <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Mission</h3>
+                       <p className="text-slate-600">To empower businesses through networking, advocacy, and resources while preserving cultural heritage and promoting commerce.</p>
+                   </div>
+               </div>
+               <div className="md:col-span-1 p-8 rounded-3xl bg-white border border-slate-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group h-full">
+                   <div className="w-16 h-16 mx-auto bg-slate-100 text-secondary rounded-full flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+                      <TrendingUp size={32} />
+                   </div>
+                   <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Goals</h3>
+                   <p className="text-slate-600">Foster entrepreneurship, facilitate trade between Nepal and USA, and provide mentorship for the next generation of leaders.</p>
+               </div>
+            </div>
          </div>
-      </div>
+      </section>
 
       {/* Latest Events - Visual Improvements */}
       <section className="py-24 bg-white relative">

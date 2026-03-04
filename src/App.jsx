@@ -18,6 +18,8 @@ import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 import Blogs from './pages/Blogs';
 import BlogDetails from './pages/BlogDetails';
+import Gallery from './pages/Gallery';
+// import EConsultReview from './gazuntite/EConsultReview';
 
 // Admin
 import AdminLayout from './pages/admin/AdminLayout';
@@ -66,6 +68,9 @@ function App() {
             {/* Admin Login - Outside Layout */}
           <Route path="/admin/login" element={<AdminLogin />} />
 
+          {/* Gazuntite Demo Route - Standalone */}
+          {/* <Route path="/econsult" element={<EConsultReview />} /> */}
+
           {/* Admin Protected Routes */}
           <Route path="/admin/*" element={
               <AdminLayout>
@@ -101,6 +106,7 @@ function App() {
                       <Route path="/events/:slug" element={<EventDetails />} />
                       <Route path="/blogs" element={<Blogs />} />
                       <Route path="/blogs/:slug" element={<BlogDetails />} />
+                      <Route path="/gallery" element={<Gallery />} />
                       <Route path="*" element={<div className="p-20 text-center">Page not found</div>} />
                   </Routes>
               </MainLayout>

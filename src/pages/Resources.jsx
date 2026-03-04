@@ -53,9 +53,9 @@ const Resources = () => {
 
   // Placeholder icons for the guides above since I didn't import them all
   const GuideIcon = ({ i }) => {
-      if(i===0) return <Zap className="text-white opacity-80" size={40} />
-      if(i===1) return <Lightbulb className="text-white opacity-80" size={40} />
-      return <Coffee className="text-white opacity-80" size={40} />
+      if(i===0) return <Zap className="text-secondary opacity-80" size={40} />
+      if(i===1) return <Lightbulb className="text-secondary opacity-80" size={40} />
+      return <Coffee className="text-secondary opacity-80" size={40} />
   }
 
   return (
@@ -64,16 +64,15 @@ const Resources = () => {
       {/* Hero Header */}
       <section className="relative py-20 lg:py-28 overflow-hidden bg-slate-900">
         <div className="absolute inset-0 bg-mesh opacity-20 mix-blend-overlay"></div>
-        <div className="absolute -top-[50%] -left-[20%] w-[80%] h-[150%] bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-[50%] -right-[20%] w-[80%] h-[150%] bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute -top-[50%] -left-[20%] w-[80%] h-[150%] bg-slate-800/50 rounded-full blur-3xl animate-pulse"></div>
         
         <div className="container mx-auto px-6 text-center relative z-10">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full backdrop-blur-md text-secondary font-bold text-xs uppercase tracking-widest mb-6"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-md text-slate-300 font-bold text-xs uppercase tracking-widest mb-6"
             >
-                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-slate-400 animate-pulse"></span>
                 Curated High-Value Content
             </motion.div>
             <motion.h1 
@@ -81,9 +80,9 @@ const Resources = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-5xl lg:text-7xl font-heading font-bold text-white mb-6 tracking-tight"
             >
-                Resource <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-secondary">Library</span>
+                Resource <span className="text-slate-400">Library</span>
             </motion.h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto font-body leading-relaxed">
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto font-body leading-relaxed">
                 Empower your journey with our collection of monthly insights, expert audio sessions, and comprehensive guides.
             </p>
         </div>
@@ -132,22 +131,23 @@ const Resources = () => {
         </div>
 
         {/* Podcast Feature */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 lg:p-14 mb-20 relative overflow-hidden text-white shadow-2xl">
-             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -mr-20 -mt-20"></div>
+        <div className="bg-slate-900 rounded-3xl p-8 lg:p-14 mb-20 relative overflow-hidden text-white shadow-xl border border-slate-800">
+             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-slate-800/30 rounded-full blur-[100px] -mr-20 -mt-20"></div>
              
              <div className="flex flex-col lg:flex-row gap-12 relative z-10 items-center">
                 <div className="lg:w-1/3 text-center lg:text-left">
-                    <span className="inline-block p-3 bg-white/10 rounded-2xl mb-6 text-secondary backdrop-blur-md border border-white/5">
+                    <span className="inline-block p-3 bg-white/5 rounded-2xl mb-6 text-slate-400 backdrop-blur-md border border-white/10">
                         <Mic size={32} />
                     </span>
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4">The NACOC Podcast</h2>
-                    <p className="text-slate-300 mb-8 leading-relaxed">
+                    <p className="text-slate-400 mb-8 leading-relaxed">
                         Authentic conversations with Nepali business leaders navigating the American market. Real stories, real advice.
                     </p>
-                    <button className="bg-secondary text-slate-900 px-8 py-3 rounded-full font-bold hover:bg-white transition-colors flex items-center mx-auto lg:mx-0 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                    <button className="bg-white text-slate-900 px-8 py-3 rounded-full font-bold hover:bg-slate-200 transition-colors flex items-center mx-auto lg:mx-0 shadow-lg">
                         <Play size={18} className="mr-2 fill-current" /> Listen Now
                     </button>
                 </div>
+
 
                 <div className="lg:w-2/3 grid gap-5 w-full">
                     {podcasts.map((pod, idx) => (
@@ -187,23 +187,23 @@ const Resources = () => {
                      <motion.div 
                         key={index}
                         whileHover={{ y: -8 }}
-                        className={`bg-gradient-to-br ${guide.gradient} p-8 rounded-3xl text-white relative overflow-hidden shadow-lg h-80 flex flex-col justify-between group`}
+                        className={`bg-white border border-slate-200 p-8 rounded-3xl text-slate-800 relative overflow-hidden shadow-sm hover:shadow-xl h-80 flex flex-col justify-between group transition-shadow`}
                      >
                         <div className="absolute top-0 right-0 p-6 opacity-10 transform scale-150 group-hover:rotate-12 transition-transform duration-500">
                              <GuideIcon i={index} />
                         </div>
                         
                         <div className="relative z-10">
-                            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 border border-white/10">
+                            <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mb-6 border border-slate-200">
                                 <GuideIcon i={index} />
                             </div>
                             <h3 className="text-2xl font-bold mb-3 leading-tight">{guide.title}</h3>
-                            <p className="text-white/80 text-sm leading-relaxed mb-6">
+                            <p className="text-slate-600 text-sm leading-relaxed mb-6">
                                 {guide.desc}
                             </p>
                         </div>
                         
-                        <a href={guide.link} className="relative z-10 inline-flex items-center text-sm font-bold border-b border-white/30 pb-1 hover:border-white transition-colors w-fit">
+                        <a href={guide.link} className="relative z-10 inline-flex items-center text-sm font-bold border-b border-primary/30 pb-1 hover:border-primary text-primary transition-colors w-fit">
                             Start Reading <ExternalLink size={14} className="ml-2" />
                         </a>
                      </motion.div>

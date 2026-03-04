@@ -10,10 +10,10 @@ const Programs = () => {
       
       {/* Header - More Immersive */}
          <section className="relative py-32 bg-slate-900 text-white overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-slate-900 to-indigo-900"></div>
+            <div className="absolute inset-0 bg-slate-900"></div>
             <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
-            <div className="absolute -top-40 -left-40 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] animate-pulse"></div>
-            <div className="absolute top-40 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse delay-1000"></div>
+            <div className="absolute -top-40 -left-40 w-96 h-96 bg-slate-800/50 rounded-full blur-[100px] animate-pulse"></div>
+            <div className="absolute top-40 -right-40 w-96 h-96 bg-slate-800/50 rounded-full blur-[100px] animate-pulse delay-1000"></div>
 
             <div className="container mx-auto px-6 relative z-10 text-center">
                 <motion.div
@@ -21,13 +21,13 @@ const Programs = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <span className="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-secondary text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                    <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
                         Empowering Growth
                     </span>
                     <h1 className="text-5xl lg:text-7xl font-heading font-bold mb-6 tracking-tight">
-                        Strategic <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-orange-400">Programs</span>
+                        Strategic <span className="text-slate-400">Programs</span>
                     </h1>
-                    <p className="text-xl text-blue-100 max-w-2xl mx-auto font-body leading-relaxed">
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto font-body leading-relaxed">
                         Designed to empower the Nepalese-American business community through practical tools, education, and connections.
                     </p>
                 </motion.div>
@@ -44,7 +44,7 @@ const Programs = () => {
             className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center"
          >
             <div className="lg:w-1/2 order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 text-purple-600 font-bold uppercase tracking-widest text-sm mb-4">
+                <div className="inline-flex items-center gap-2 text-slate-800 font-bold uppercase tracking-widest text-sm mb-4">
                     <Rocket size={18} /> Entrepreneurship
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-heading font-bold text-slate-900 mb-6">Start-Up Academy</h2>
@@ -52,13 +52,13 @@ const Programs = () => {
                     An intensive 3-month program that transforms aspiring entrepreneurs into business owners. We don't just teach theory; we help you launch.
                 </p>
                 
-                <div className="bg-surface-50 rounded-2xl p-6 border border-slate-100 mb-8">
+                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-8">
                     <ul className="space-y-4">
                         {[
-                            { text: "Brainstorm & validate business ideas", icon: <Zap className="w-5 h-5 text-yellow-500" /> },
-                            { text: "Write a comprehensive business plan", icon: <BarChart className="w-5 h-5 text-blue-500" /> },
-                            { text: "Pitch to potential investors (Shark Tank style!)", icon: <Star className="w-5 h-5 text-orange-500" /> },
-                            { text: "Legally register & launch your business", icon: <CheckCircle2 className="w-5 h-5 text-green-500" /> }
+                            { text: "Brainstorm & validate business ideas", icon: <Zap className="w-5 h-5 text-slate-500" /> },
+                            { text: "Write a comprehensive business plan", icon: <BarChart className="w-5 h-5 text-slate-500" /> },
+                            { text: "Pitch to potential investors (Shark Tank style!)", icon: <Star className="w-5 h-5 text-slate-500" /> },
+                            { text: "Legally register & launch your business", icon: <CheckCircle2 className="w-5 h-5 text-slate-500" /> }
                         ].map((item, i) => (
                             <li key={i} className="flex items-center text-slate-800 font-medium">
                                 <div className="bg-white p-2 rounded-lg shadow-sm mr-3 border border-slate-100">
@@ -70,32 +70,32 @@ const Programs = () => {
                     </ul>
                 </div>
 
-                <Link to="/contact-us" className="inline-flex items-center px-8 py-4 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:-translate-y-1">
+                <Link to="/contact-us" className="inline-flex items-center px-8 py-4 bg-slate-800 text-white rounded-full font-bold hover:bg-slate-900 transition-all shadow-lg hover:-translate-y-1">
                     Apply for Next Batch <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
             </div>
             
             <div className="lg:w-1/2 order-1 lg:order-2">
                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 to-indigo-600 rounded-[2rem] transform rotate-3 scale-105 opacity-20 blur-2xl"></div>
-                    <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-[2rem] p-10 lg:p-12 text-white relative shadow-2xl overflow-hidden group">
-                         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
-                         <div className="absolute bottom-0 left-0 w-40 h-40 bg-black opacity-10 rounded-full -ml-10 -mb-10 blur-xl"></div>
+                    <div className="absolute inset-0 bg-slate-100 rounded-[2rem] transform rotate-3 scale-105 opacity-50 blur-2xl"></div>
+                    <div className="bg-slate-800 rounded-[2rem] p-10 lg:p-12 text-white relative shadow-2xl overflow-hidden group">
+                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl"></div>
+                         <div className="absolute bottom-0 left-0 w-40 h-40 bg-black/20 rounded-full -ml-10 -mb-10 blur-xl"></div>
                          
-                         <Rocket className="w-24 h-24 text-white/20 absolute bottom-10 right-10 transform -rotate-12 group-hover:scale-110 transition-transform duration-500" />
+                         <Rocket className="w-24 h-24 text-white/10 absolute bottom-10 right-10 transform -rotate-12 group-hover:scale-110 transition-transform duration-500" />
 
                          <div className="grid grid-cols-2 gap-6 relative z-10">
-                            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
+                            <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10">
                                 <div className="text-4xl font-bold mb-1">3</div>
-                                <div className="text-xs font-bold uppercase opacity-80">Months Duration</div>
+                                <div className="text-xs font-bold uppercase opacity-80 text-slate-300">Months Duration</div>
                             </div>
-                            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
+                            <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10">
                                 <div className="text-4xl font-bold mb-1">1:1</div>
-                                <div className="text-xs font-bold uppercase opacity-80">Expert Mentorship</div>
+                                <div className="text-xs font-bold uppercase opacity-80 text-slate-300">Expert Mentorship</div>
                             </div>
-                            <div className="col-span-2 bg-white text-purple-900 p-6 rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform">
-                                <div className="text-xl font-bold mb-2 flex items-center gap-2"><CheckCircle2 className="w-5 h-5"/> Real World Launch</div>
-                                <p className="text-sm opacity-80 font-medium">Students graduate with a legally registered business ready for customers.</p>
+                            <div className="col-span-2 bg-white text-slate-900 p-6 rounded-2xl shadow-lg transform group-hover:scale-[1.02] transition-transform border border-slate-200">
+                                <div className="text-xl font-bold mb-2 flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-slate-800"/> Real World Launch</div>
+                                <p className="text-sm text-slate-600 font-medium">Students graduate with a legally registered business ready for customers.</p>
                             </div>
                          </div>
                     </div>
@@ -111,24 +111,24 @@ const Programs = () => {
             className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center"
          >
             <div className="lg:w-1/2 relative">
-                <div className="absolute inset-0 bg-gradient-to-bl from-blue-400 to-cyan-300 rounded-[2rem] transform -rotate-2 scale-105 opacity-20 blur-2xl"></div>
-                <div className="bg-white rounded-[2rem] p-4 shadow-2xl border border-slate-100 relative overflow-hidden">
+                <div className="absolute inset-0 bg-slate-200/50 rounded-[2rem] transform -rotate-2 scale-105 opacity-50 blur-2xl"></div>
+                <div className="bg-white rounded-[2rem] p-4 shadow-xl border border-slate-100 relative overflow-hidden group">
                     <img 
                         src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80" 
                         alt="Business Meeting" 
-                        className="rounded-3xl w-full object-cover h-[400px]" 
+                        className="rounded-3xl w-full object-cover h-[400px] grayscale group-hover:grayscale-0 transition-all duration-700" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-8">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent flex items-end p-8">
                         <div className="text-white">
                              <p className="text-2xl font-bold italic mb-2">"The needs of the client drive the experience."</p>
-                             <p className="text-sm font-bold uppercase tracking-widest text-primary-200">NACOC Core Philosophy</p>
+                             <p className="text-sm font-bold uppercase tracking-widest text-slate-300">NACOC Core Philosophy</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="lg:w-1/2">
-                <div className="inline-flex items-center gap-2 text-cyan-600 font-bold uppercase tracking-widest text-sm mb-4">
+                <div className="inline-flex items-center gap-2 text-slate-500 font-bold uppercase tracking-widest text-sm mb-4">
                     <Laptop size={18} /> Support
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-heading font-bold text-slate-900 mb-6">Business Assistance Center</h2>
@@ -144,12 +144,12 @@ const Programs = () => {
                         "Govt. Certification Help",
                         "Estimating/Bidding Help"
                     ].map((item, i) => (
-                        <div key={i} className="flex items-center text-sm font-bold text-slate-700 bg-cyan-50/50 p-4 rounded-xl border border-cyan-100 hover:bg-cyan-50 transition-colors">
-                           <CheckCircle2 size={18} className="text-cyan-600 mr-3 flex-shrink-0" /> {item}
+                        <div key={i} className="flex items-center text-sm font-bold text-slate-700 bg-slate-50 p-4 rounded-xl border border-slate-200 hover:bg-white hover:shadow-md transition-all">
+                           <CheckCircle2 size={18} className="text-slate-500 mr-3 flex-shrink-0" /> {item}
                         </div>
                     ))}
                 </div>
-                <Link to="/contact-us" className="inline-flex items-center px-8 py-4 bg-cyan-600 text-white rounded-full font-bold hover:bg-cyan-700 transition-all shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:-translate-y-1">
+                <Link to="/contact-us" className="inline-flex items-center px-8 py-4 bg-white border border-slate-200 text-slate-900 rounded-full font-bold hover:bg-slate-50 transition-all shadow-sm hover:-translate-y-1">
                     Get Free Assistance <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
             </div>
