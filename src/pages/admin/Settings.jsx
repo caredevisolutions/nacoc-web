@@ -15,7 +15,7 @@ const Settings = () => {
     const [activeTab, setActiveTab] = useState('general');
     const [darkMode, setDarkMode] = useState(false);
     const [emailNotifs, setEmailNotifs] = useState(true);
-    const [siteName, setSiteName] = useState('NACOC Admin Portal');
+    const [siteName, setSiteName] = useState('NST Admin Portal');
 
     useEffect(() => {
         const isDark = localStorage.getItem('theme') === 'dark';
@@ -146,7 +146,7 @@ const Settings = () => {
                                     <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Email Address</label>
                                     <div className="relative">
                                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                                        <input defaultValue="admin@nacoc.org" className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 dark:bg-slate-700/50 dark:text-white outline-none" />
+                                        <input defaultValue="admin@nst.org" className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 dark:bg-slate-700/50 dark:text-white outline-none" />
                                     </div>
                                 </div>
                             </div>

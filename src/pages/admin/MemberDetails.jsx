@@ -161,7 +161,7 @@ const MemberDetails = () => {
                                 <div>
                                     <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-4">About Member</h3>
                                     <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                                        {member.bio || "No biography provided. This member has been part of the NACOC community since " + member.joinDate + ". They are currently mapped to the " + member.tier + " tier plan."}
+                                        {member.bio || "No biography provided. This member has been part of the NST community since " + member.joinDate + ". They are currently mapped to the " + member.tier + " tier plan."}
                                     </p>
                                 </div>
 

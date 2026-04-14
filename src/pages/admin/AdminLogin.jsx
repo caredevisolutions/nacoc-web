@@ -57,7 +57,7 @@ const AdminLogin = () => {
                      </div>
                      
                      <div className="mt-12 md:mt-0 text-xs text-blue-200/60 font-mono">
-                        NACOC Admin Portal v2.0
+                        NST Admin Portal v2.0
                      </div>
                 </div>
 

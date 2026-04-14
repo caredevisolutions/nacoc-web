@@ -118,7 +118,7 @@ const AdminLayout = ({ children }) => {
         <div className="bg-slate-50 dark:bg-slate-900 min-h-screen flex text-slate-800 dark:text-slate-200 transition-colors">
             {/* Mobile Header */}
             <div className="lg:hidden fixed top-0 w-full bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 z-50 px-4 py-3 flex justify-between items-center transition-colors">
-                <span className="font-bold text-xl text-primary dark:text-primary-light">NACOC <span className="text-slate-500 dark:text-slate-400 font-normal">Admin</span></span>
+                <span className="font-bold text-xl text-primary dark:text-primary-light">NST <span className="text-slate-500 dark:text-slate-400 font-normal">Admin</span></span>
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-slate-600 dark:text-slate-300">
                     {isMobileMenuOpen ? <X /> : <Menu />}
                 </button>
@@ -132,7 +132,7 @@ const AdminLayout = ({ children }) => {
             `}>
                 <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-700 transition-colors">
                     <span className={`font-bold text-xl text-primary dark:text-primary-light transition-opacity ${!isSidebarOpen && 'lg:hidden'}`}>
-                        NACOC <span className="text-slate-500 dark:text-slate-400 font-normal">Admin</span>
+                        NST <span className="text-slate-500 dark:text-slate-400 font-normal">Admin</span>
                     </span>
                     <span className={`font-bold text-xl text-primary dark:text-primary-light ${isSidebarOpen && 'hidden'} mx-auto`}>N</span>
                 </div>
