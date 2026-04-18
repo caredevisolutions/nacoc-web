@@ -2,22 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Globe, Phone, Mail, Clock, ShieldCheck, Share2, ArrowLeft, Star, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
-import { useData } from '../context/DataContext';
+import { api } from '../services/api';
+import { adaptBusiness } from '../services/adapters';
 
 const BusinessDetails = () => {
     const { slug } = useParams();
-    const { businesses } = useData();
     const [business, setBusiness] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (businesses && businesses.length > 0) {
-            // Find by slug or ID
-            const found = businesses.find(b => b.slug === slug || b.id.toString() === slug);
-            setBusiness(found);
+        let active = true;
+        (async () => {
+            setLoading(true);
+            const raw = await api.getBusinessBySlug(slug);
+            if (!active) return;
+            setBusiness(raw ? adaptBusiness(raw) : null);
             setLoading(false);
-        }
-    }, [slug, businesses]);
+        })();
+        return () => { active = false; };
+    }, [slug]);
 
     if (loading) {
         return (
@@ -63,9 +66,9 @@ const BusinessDetails = () => {
                         </div>
                         <h1 className="text-4xl lg:text-5xl font-bold font-heading mb-2">{business.name}</h1>
                         <div className="flex flex-wrap items-center gap-4 text-slate-300 text-sm sm:text-base">
-                            <span className="flex items-center"><MapPin size={16} className="mr-1.5" /> {business.address}</span>
-                            <span className="hidden sm:inline text-slate-500">•</span>
-                            <span className="flex items-center"><Star size={16} className="mr-1.5 text-yellow-500 fill-yellow-500" /> 4.9 (120 Reviews)</span>
+                            {business.address && (
+                              <span className="flex items-center"><MapPin size={16} className="mr-1.5" /> {business.address}</span>
+                            )}
                         </div>
                      </motion.div>
                 </div>
@@ -96,20 +99,6 @@ const BusinessDetails = () => {
                                     </span>
                                 ))}
                                 {!business.services && <span className="text-slate-400 italic">No specific services listed.</span>}
-                            </div>
-                        </div>
-
-                        {/* Gallery / Visuals Placeholder */}
-                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
-                            <h2 className="text-2xl font-bold text-slate-800 mb-4">Gallery</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {[1,2,3].map((img) => (
-                                    <div key={img} className="bg-slate-100 rounded-xl aspect-square w-full relative overflow-hidden group">
-                                         <div className="absolute inset-0 flex items-center justify-center text-slate-300 font-bold bg-slate-200">
-                                            IMAGE {img}
-                                         </div>
-                                    </div>
-                                ))}
                             </div>
                         </div>
 

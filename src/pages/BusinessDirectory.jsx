@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, Globe, Phone, Filter, ChevronRight, Star, ChevronDown, ChevronUp, Mail, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useData } from '../context/DataContext';
+import { api } from '../services/api';
+import { adaptBusiness } from '../services/adapters';
 
 const BusinessCard = ({ biz }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -99,15 +100,28 @@ const BusinessCard = ({ biz }) => {
 }
 
 const BusinessDirectory = () => {
-    const { businesses } = useData();
+    const [businesses, setBusinesses] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [textFilter, setTextFilter] = useState('');
     const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
-    const categories = ['All Categories', ...new Set(businesses.map(b => b.category))];
+    useEffect(() => {
+        let active = true;
+        (async () => {
+            setLoading(true);
+            const raw = await api.getBusinesses();
+            if (!active) return;
+            setBusinesses(raw.map(adaptBusiness).filter(Boolean));
+            setLoading(false);
+        })();
+        return () => { active = false; };
+    }, []);
+
+    const categories = ['All Categories', ...new Set(businesses.map(b => b.category).filter(Boolean))];
 
     const filteredBusinesses = businesses.filter(b => {
-        const matchesText = b.name.toLowerCase().includes(textFilter.toLowerCase()) || 
-                            b.category.toLowerCase().includes(textFilter.toLowerCase());
+        const matchesText = b.name.toLowerCase().includes(textFilter.toLowerCase()) ||
+                            (b.category || '').toLowerCase().includes(textFilter.toLowerCase());
         const matchesCategory = selectedCategory === "All Categories" || b.category === selectedCategory;
         return matchesText && matchesCategory;
     });
@@ -187,6 +201,11 @@ const BusinessDirectory = () => {
 
               {/* Listings */}
               <div className="lg:w-3/4 flex flex-col gap-5">
+                  {loading ? (
+                      <div className="flex justify-center py-20">
+                          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                      </div>
+                  ) : (
                   <AnimatePresence>
                   {filteredBusinesses.length > 0 ? (
                       filteredBusinesses.map((biz) => (
@@ -201,11 +220,18 @@ const BusinessDirectory = () => {
                           <div className="bg-slate-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                               <Search className="text-slate-400" size={24} />
                           </div>
-                          <h3 className="text-lg font-bold text-slate-900 mb-2">No businesses found</h3>
-                          <p className="text-slate-500 text-sm">Try adjusting your search or filters.</p>
+                          <h3 className="text-lg font-bold text-slate-900 mb-2">
+                              {businesses.length === 0 ? 'No businesses published yet' : 'No businesses match your search'}
+                          </h3>
+                          <p className="text-slate-500 text-sm">
+                              {businesses.length === 0
+                                  ? 'Member businesses will appear here once they are added in the WordPress admin.'
+                                  : 'Try adjusting your search or filters.'}
+                          </p>
                       </motion.div>
                   )}
                   </AnimatePresence>
+                  )}
               </div>
           </div>
 

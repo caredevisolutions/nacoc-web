@@ -1,12 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Star, Zap, Crown, Award, ArrowRight } from 'lucide-react';
+import { Check, Star, Zap, Crown, Award, ArrowRight, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+// Feature flag: when 'true', the "Choose Plan" buttons are active and route
+// to the membership application form. When unset / anything else, the buttons
+// are disabled and a "Coming Soon" banner is shown at the top of the page.
+// Set in your .env / Amplify env vars as: VITE_MEMBERSHIP_ENABLED=true
+const MEMBERSHIP_ENABLED =
+  String(import.meta.env.VITE_MEMBERSHIP_ENABLED || '').toLowerCase() === 'true';
 
 const Membership = () => {
   const navigate = useNavigate();
 
   const handleChoosePlan = (plan) => {
+    if (!MEMBERSHIP_ENABLED) return;
     // Exclude the icon component as it cannot be serialized in navigation state
     const { icon, ...planDetails } = plan;
     navigate('/membership/checkout', { state: { plan: planDetails } });
@@ -56,7 +64,27 @@ const Membership = () => {
       <div className="absolute top-40 -left-20 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        
+
+        {/* Coming Soon banner (shown when membership signup is disabled) */}
+        {!MEMBERSHIP_ENABLED && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto mb-10 bg-amber-50 border border-amber-200 rounded-2xl px-6 py-5 flex items-start gap-4 shadow-sm"
+          >
+            <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+              <Clock className="w-5 h-5" />
+            </div>
+            <div className="text-sm">
+              <div className="font-bold text-amber-900 mb-1">Online membership signup is coming soon</div>
+              <div className="text-amber-800 leading-relaxed">
+                We&rsquo;re finalizing the new member application process. In the meantime,
+                please <a href="/contact-us" className="font-semibold underline hover:text-amber-900">contact us</a> and our membership team will reach out personally.
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.div 
@@ -140,9 +168,22 @@ const Membership = () => {
 
                  <button 
                    onClick={() => handleChoosePlan(tier)}
-                   className={`w-full py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center group ${tier.popular ? 'bg-primary hover:bg-primary-dark text-white shadow-xl shadow-primary/25' : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'}`}
+                   disabled={!MEMBERSHIP_ENABLED}
+                   aria-disabled={!MEMBERSHIP_ENABLED}
+                   title={MEMBERSHIP_ENABLED ? '' : 'Coming soon'}
+                   className={`w-full py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center group ${
+                     !MEMBERSHIP_ENABLED
+                       ? 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed'
+                       : tier.popular
+                         ? 'bg-primary hover:bg-primary-dark text-white shadow-xl shadow-primary/25'
+                         : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'
+                   }`}
                   >
-                    Choose Plan <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    {MEMBERSHIP_ENABLED ? (
+                      <>Choose Plan <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></>
+                    ) : (
+                      <>Coming Soon</>
+                    )}
                  </button>
               </div>
             </motion.div>

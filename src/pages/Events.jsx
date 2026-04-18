@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useData } from '../context/DataContext';
+import { api } from '../services/api';
+import { cleanWpHtml } from '../utils/wpContent';
 
 const Events = () => {
-  const { events } = useData();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // In a real app, loading might come from initial fetch. 
-  // checking if data is ready.
-  if (!events) {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setLoading(true);
+      try {
+        const data = await api.getEvents();
+        console.log('Events loaded:', data);
+        setEvents(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Failed to load events:', error);
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) {
     return (
-        <div className="bg-slate-50 min-h-screen pt-32 flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="bg-slate-50 min-h-screen pt-32 flex flex-col items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+            <p className="text-slate-500 text-sm">Loading events...</p>
+            <p className="text-slate-400 text-xs mt-2">Check console for details</p>
         </div>
     );
   }
@@ -53,13 +73,19 @@ const Events = () => {
           ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event, index) => {
-              // Parse date from "August 9, 2025" or "2025-08-09"
-              const dateObj = new Date(event.date);
-              const month = isNaN(dateObj.getTime()) ? event.date.split(' ')[0].substring(0,3) : dateObj.toLocaleDateString('en-US', { month: 'short' });
-              const day = isNaN(dateObj.getTime()) ? event.date.split(' ')[1].replace(',','') : dateObj.toLocaleDateString('en-US', { day: 'numeric' });
+              // Handle Tribe Events API date format
+              const dateObj = new Date(event.start_date || event.date);
+              const month = dateObj.toLocaleDateString('en-US', { month: 'short' });
+              const day = dateObj.toLocaleDateString('en-US', { day: 'numeric' });
 
-              const imageUrl = event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
-              
+              // Get featured image from Tribe API (image can be object or string)
+              const imageUrl = (typeof event.image === 'object' ? event.image?.url : event.image) || event.featured_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+
+              // Extract venue name (Tribe API returns venue as object)
+              const venueName = typeof event.venue === 'object' && event.venue !== null
+                ? (event.venue.venue || event.venue.address || event.venue.city || '')
+                : (event.venue || '');
+
               return (
               <motion.div
                 key={event.id}
@@ -84,20 +110,20 @@ const Events = () => {
                 
                 <div className="p-8 flex flex-col justify-between flex-1">
                    <div>
-                      {event.time && (
+                      {event.start_date && (
                           <div className="flex items-center text-xs font-bold text-primary uppercase tracking-wider mb-2">
-                            <Clock size={14} className="mr-1" /> {event.time}
+                            <Clock size={14} className="mr-1" /> {new Date(event.start_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
                       )}
-                      <h3 className="font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors text-2xl">
-                        {event.title}
+                      <h3 className="font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors text-2xl" dangerouslySetInnerHTML={{ __html: typeof event.title === 'object' ? event.title?.rendered : event.title }}>
                       </h3>
-                      <div className="flex items-start text-slate-500 mb-4 text-sm font-medium">
-                         <MapPin size={16} className="mr-2 mt-0.5 text-slate-400 shrink-0" />
-                         <span>{event.location || 'TBA'}</span>
-                      </div>
-                      <p className="text-slate-600 mb-6 leading-relaxed line-clamp-3">
-                        {event.description}
+                      {venueName && (
+                        <div className="flex items-start text-slate-500 mb-4 text-sm font-medium">
+                           <MapPin size={16} className="mr-2 mt-0.5 text-slate-400 shrink-0" />
+                           <span>{venueName}</span>
+                        </div>
+                      )}
+                      <p className="text-slate-600 mb-6 leading-relaxed line-clamp-3" dangerouslySetInnerHTML={{ __html: cleanWpHtml((typeof event.description === 'object' ? event.description?.rendered : event.description) || '') || 'Event details coming soon' }}>
                       </p>
                    </div>
                    

@@ -2,22 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, ArrowLeft, Share2 } from 'lucide-react';
-import { useData } from '../context/DataContext';
+import { api } from '../services/api';
+import { cleanWpHtml } from '../utils/wpContent';
 
 const EventDetails = () => {
   const { slug } = useParams();
-  const { events } = useData();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (events && events.length > 0) {
-        // Try to find by slug first, then ID for backward compatibility
-        const found = events.find(e => e.slug === slug || e.id.toString() === slug);
-        setEvent(found);
-        setLoading(false);
+    const fetchEvent = async () => {
+      setLoading(true);
+      const data = await api.getEventById(slug);
+      setEvent(data);
+      setLoading(false);
+    };
+
+    if (slug) {
+      fetchEvent();
     }
-  }, [slug, events]);
+  }, [slug]);
 
   if (loading) {
      return (
@@ -39,28 +43,33 @@ const EventDetails = () => {
   }
 
   // Data Extraction
-  const image = event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
-  
-  // Handle different date formats (mock data might be "August 9, 2025" or ISO)
-  let dateObj = new Date(event.date || event.start_date);
-  if (isNaN(dateObj.getTime())) {
-      dateObj = new Date(); // Fallback
-  }
-  
+  const image = (typeof event.image === 'object' ? event.image?.url : event.image) || event.featured_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
+
+  // Handle Tribe Events API date format (start_date is ISO format from WordPress)
+  const dateObj = new Date(event.start_date || event.date);
   const dateFormatted = dateObj.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  // Time from data or default
-  const timeFormatted = event.time || dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const timeFormatted = event.start_date ? dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : (event.time || 'TBA');
   const isFutureEvent = dateObj > new Date();
 
-  // Location logic
-  let locationStr = event.location || 'Online';
-  if (event.venue && typeof event.venue === 'object') {
-      const parts = [];
-      if (event.venue.venue) parts.push(event.venue.venue);
-      if (event.venue.address) parts.push(event.venue.address);
-      if (event.venue.city) parts.push(event.venue.city);
-      if (event.venue.state) parts.push(event.venue.state);
-      if (parts.length > 0) locationStr = parts.join(', ');
+  // Title and description can be objects (WP) or strings (Tribe)
+  const titleHtml = typeof event.title === 'object' ? event.title?.rendered : event.title;
+  const rawDescription = typeof event.description === 'object' ? event.description?.rendered : event.description;
+  // For past events, render any inline [button] shortcodes (e.g. "Register Here")
+  // as disabled pills so visitors can't click through to a closed Eventbrite page.
+  const descriptionHtml = cleanWpHtml(rawDescription, { disabled: !isFutureEvent });
+
+  // Location from Tribe Events API (venue is an object with venue/address/city)
+  let locationStr = 'TBA';
+  if (typeof event.venue === 'object' && event.venue !== null) {
+    const parts = [];
+    if (event.venue.venue) parts.push(event.venue.venue);
+    if (event.venue.city) parts.push(event.venue.city);
+    if (event.venue.stateprovince || event.venue.province) parts.push(event.venue.stateprovince || event.venue.province);
+    locationStr = parts.length > 0 ? parts.join(', ') : 'TBA';
+  } else if (typeof event.venue === 'string' && event.venue) {
+    locationStr = event.venue;
+  } else if (event.location) {
+    locationStr = event.location;
   }
 
   return (
@@ -72,7 +81,7 @@ const EventDetails = () => {
         <div className="absolute inset-0">
              <img 
                src={image} 
-               alt={event.title} 
+               alt={titleHtml?.replace(/<[^>]+>/g, '') || 'Event'} 
                className="w-full h-full object-cover opacity-50 contrast-125 key-visual"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
@@ -90,7 +99,7 @@ const EventDetails = () => {
              animate={{ opacity: 1, y: 0 }}
              className="max-w-4xl"
            >
-             <h1 className="text-4xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight drop-shadow-xl" dangerouslySetInnerHTML={{ __html: event.title }}>
+             <h1 className="text-4xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight drop-shadow-xl" dangerouslySetInnerHTML={{ __html: titleHtml }}>
              </h1>
              
              <div className="flex flex-wrap gap-4 text-white font-medium">
@@ -116,7 +125,7 @@ const EventDetails = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 prose prose-lg max-w-none text-slate-600 leading-relaxed font-body prose-headings:font-heading prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-primary prose-img:rounded-2xl"
               >
-                  <div dangerouslySetInnerHTML={{ __html: event.description }} />
+                  <div dangerouslySetInnerHTML={{ __html: descriptionHtml || 'Event details coming soon.' }} />
               </motion.div>
            </div>
 

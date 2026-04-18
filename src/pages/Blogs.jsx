@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, User, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { api } from '../services/api';
+import { cleanWpHtml } from '../utils/wpContent';
 
 const Blogs = () => {
     
@@ -90,7 +91,7 @@ const Blogs = () => {
                         <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }}>
                         </h2>
                         
-                        <div className="text-slate-600 mb-6 leading-relaxed line-clamp-3 text-sm" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}>
+                        <div className="text-slate-600 mb-6 leading-relaxed line-clamp-3 text-sm" dangerouslySetInnerHTML={{ __html: cleanWpHtml(post.excerpt.rendered) }}>
                         </div>
                     </div>
                     

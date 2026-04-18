@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, TrendingUp, Calendar, ArrowUpRight, MapPin, Clock, Shield, Award } from 'lucide-react';
-import StatsSection from '../components/StatsSection';
+import { api } from '../services/api';
+import { adaptEvent } from '../services/adapters';
 
 const Home = () => {
+
+  const [upcoming, setUpcoming] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const raw = await api.getUpcomingEvents(3);
+      if (!active) return;
+      setUpcoming(raw.map(adaptEvent).filter(Boolean));
+    })();
+    return () => { active = false; };
+  }, []);
     
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -247,59 +260,76 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-             {/* Feature Event */}
-             <Link to="/events" className="lg:col-span-2 group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] lg:h-[450px] block">
-                <img 
-                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                    alt="Gala" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
-                
-                <div className="absolute top-6 left-6">
-                    <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Featured
-                    </span>
-                </div>
+            {upcoming.length === 0 ? (
+              <div className="lg:col-span-3 text-center py-16 bg-slate-50 rounded-3xl border border-slate-100">
+                <Calendar className="mx-auto text-slate-300 mb-4" size={48} />
+                <h3 className="text-xl font-bold text-slate-700 mb-2">No upcoming events scheduled</h3>
+                <p className="text-slate-500 text-sm">Check back soon — new events are published on our WordPress calendar.</p>
+              </div>
+            ) : (
+              upcoming.map((event, index) => {
+                const dateObj = new Date(event.start_date);
+                const dateLabel = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const fallbackImg = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
+                const linkTo = `/events/${event.slug || event.id}`;
+                const isFeatured = index === 0;
 
-                <div className="absolute bottom-0 left-0 p-6 lg:p-10 w-full">
-                    <div className="text-secondary mb-3 font-bold flex items-center text-sm uppercase tracking-wide">
-                        <Calendar size={16} className="mr-2" /> August 9, 2025
-                    </div>
-                    <h3 className="text-2xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight">10th Annual Entrepreneurship Gala</h3>
-                    <p className="text-slate-300 mb-6 lg:mb-8 max-w-xl line-clamp-2 text-base lg:text-lg">Join industry leaders for a night of celebration, networking, and recognition of outstanding business achievements.</p>
-                    <span className="inline-flex items-center px-6 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-secondary hover:text-white transition-colors text-sm lg:text-base">
-                        Get Tickets <ArrowUpRight className="ml-2 w-4 h-4" />
-                    </span>
-                </div>
-             </Link>
-
-             {/* Secondary Event */}
-             <div className="group bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
-                <div className="h-56 overflow-hidden relative">
-                    <img 
-                        src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                        alt="Community Event"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                    />
-                </div>
-                <div className="p-8 flex-grow flex flex-col">
-                    <div className="mb-4">
-                       <span className="text-xs font-bold text-primary uppercase tracking-wider mb-1 block">Cultural</span>
-                       <h3 className="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors">Nepal Heritage Night</h3>
-                    </div>
-                    
-                    <div className="flex items-center text-slate-500 mb-4 text-sm font-medium">
-                       <MapPin size={16} className="mr-2 text-slate-400" /> <span className="truncate">Dallas, TX</span>
-                    </div>
-                    
-                    <p className="text-slate-500 text-sm mb-6 flex-grow leading-relaxed">Celebrating Nepali's unique culture and traditions.</p>
-                    
-                    <Link to="/events" className="text-slate-900 font-bold text-sm inline-flex items-center mt-auto hover:text-primary transition-colors group/link">
-                        Event Details <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
+                if (isFeatured) {
+                  return (
+                    <Link to={linkTo} key={event.id} className="lg:col-span-2 group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer h-[400px] lg:h-[450px] block">
+                      <img
+                        src={event.image || fallbackImg}
+                        alt={event.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        onError={(e) => { e.target.src = fallbackImg; }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
+                      <div className="absolute top-6 left-6">
+                        <span className="bg-white/20 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                          Featured
+                        </span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 p-6 lg:p-10 w-full">
+                        <div className="text-secondary mb-3 font-bold flex items-center text-sm uppercase tracking-wide">
+                          <Calendar size={16} className="mr-2" /> {dateLabel}
+                        </div>
+                        <h3 className="text-2xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight" dangerouslySetInnerHTML={{ __html: event.title }} />
+                        <span className="inline-flex items-center px-6 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-secondary hover:text-white transition-colors text-sm lg:text-base">
+                          Event Details <ArrowUpRight className="ml-2 w-4 h-4" />
+                        </span>
+                      </div>
                     </Link>
-                </div>
-             </div>
+                  );
+                }
+
+                return (
+                  <Link to={linkTo} key={event.id} className="group bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
+                    <div className="h-56 overflow-hidden relative">
+                      <img
+                        src={event.image || fallbackImg}
+                        alt={event.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => { e.target.src = fallbackImg; }}
+                      />
+                    </div>
+                    <div className="p-8 flex-grow flex flex-col">
+                      <div className="mb-4">
+                        <span className="text-xs font-bold text-primary uppercase tracking-wider mb-1 block">{dateLabel}</span>
+                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors" dangerouslySetInnerHTML={{ __html: event.title }} />
+                      </div>
+                      {event.venue && (
+                        <div className="flex items-center text-slate-500 mb-4 text-sm font-medium">
+                          <MapPin size={16} className="mr-2 text-slate-400" /> <span className="truncate">{event.venue}</span>
+                        </div>
+                      )}
+                      <span className="text-slate-900 font-bold text-sm inline-flex items-center mt-auto hover:text-primary transition-colors group/link">
+                        Event Details <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })
+            )}
           </div>
         </div>
       </section>

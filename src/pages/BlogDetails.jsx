@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Calendar, Facebook, Twitter, Linkedin, Share2, ArrowLeft } from 'lucide-react';
 import { api } from '../services/api';
+import { cleanWpHtml } from '../utils/wpContent';
 
 const BlogDetails = () => {
   const { slug } = useParams();
@@ -124,7 +125,7 @@ const BlogDetails = () => {
                     transition={{ delay: 0.2 }}
                     className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 prose prose-lg max-w-none text-slate-600 leading-relaxed font-body prose-headings:font-heading prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-primary prose-img:rounded-2xl"
                 >
-                    <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+                    <div dangerouslySetInnerHTML={{ __html: cleanWpHtml(post.content.rendered) }} />
                 </motion.div>
 
                 {/* Related Articles */}

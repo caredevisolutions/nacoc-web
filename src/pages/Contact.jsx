@@ -1,19 +1,24 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { api } from '../services/api';
+
+// WordPress Contact Form 7 form ID for the Contact page form.
+// Configure this in the WordPress admin (Contact > Forms) and expose the
+// numeric ID via VITE_WP_CONTACT_FORM_ID at build time.
+const CONTACT_FORM_ID = import.meta.env.VITE_WP_CONTACT_FORM_ID;
 
 const Contact = () => {
   const [formData, setFormData] = React.useState({
     firstName: '',
     lastName: '',
+    organisation: '',
     email: '',
     phone: '',
     message: ''
   });
   const [status, setStatus] = React.useState('idle'); // idle, submitting, success, error
-
-  // Use environment variable for API URL
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  const [errorMsg, setErrorMsg] = React.useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,21 +27,28 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    
-    try {
-      const response = await fetch(`${API_URL}/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      
-      if (!response.ok) throw new Error('Failed to send message');
-      
+    setErrorMsg('');
+
+    // Field names below MUST match the field names defined in the
+    // Contact Form 7 form on the WordPress backend.
+    // The field set mirrors https://nacoc.org/contact-us/ exactly:
+    //   First name *, Last name *, Organisation, Email *, Phone, Comments / Questions.
+    const result = await api.submitForm(CONTACT_FORM_ID, {
+      'your-name': `${formData.firstName} ${formData.lastName}`.trim(),
+      'your-first-name': formData.firstName,
+      'your-last-name': formData.lastName,
+      'organisation': formData.organisation,
+      'your-email': formData.email,
+      'your-tel': formData.phone,
+      'your-message': formData.message,
+    });
+
+    if (result.status === 'mail_sent') {
       setStatus('success');
-      setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      console.error('Error sending message:', error);
+      setFormData({ firstName: '', lastName: '', organisation: '', email: '', phone: '', message: '' });
+    } else {
       setStatus('error');
+      setErrorMsg(result.message || 'Failed to send message. Please try again later.');
     }
   };
 
@@ -159,6 +171,18 @@ const Contact = () => {
                         </div>
                     </div>
                     
+                    <div>
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Organisation</label>
+                        <input
+                            type="text"
+                            name="organisation"
+                            value={formData.organisation}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"
+                            placeholder="Company or organization (optional)"
+                        />
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Address</label>
@@ -186,13 +210,12 @@ const Contact = () => {
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Message</label>
+                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Comments / Questions</label>
                         <textarea 
                             rows="5" 
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
-                            required
                             className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400" 
                             placeholder="How can we help you?"
                         ></textarea>
@@ -213,7 +236,7 @@ const Contact = () => {
                     )}
                     {status === 'error' && (
                         <div className="p-4 bg-red-50 text-red-700 rounded-xl border border-red-100">
-                            Failed to send message. Please try again later.
+                            {errorMsg || 'Failed to send message. Please try again later.'}
                         </div>
                     )}
                 </form>
